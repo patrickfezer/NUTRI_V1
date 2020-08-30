@@ -1,0 +1,56 @@
+[
+  {
+    "id" : "9C617E19-B589-4340-9F9E-AAF4EC1C3D91",
+    "name" : "Fleisch",
+    "products" : [
+      {
+        "id" : "99163FB8-7EDA-4333-AF1D-08FD91F521EB",
+        "manufacturer" : "",
+        "name" : "Rumpsteak",
+        "kcal" : "130",
+        "carbs" : "0",
+        "protein" : "22.4",
+        "sugar" : "0",
+        "roughage" : "0",
+        "fat" : "4.5",
+        "saturated" : "3"
+      }
+    ]
+  },
+  {
+    "id" : "9455F775-49BE-4E84-A59A-3973F77DE3DC",
+    "name" : "Teigwaren",
+    "products" : [
+      {
+        "id" : "03203713-5310-46CC-AAFA-8A3E661A0A71",
+        "name" : "Pasta",
+        "manufacturer" : "Barilla",
+        "kcal" : "364",
+        "protein" : "12.5",
+        "carbs" : "71.2",
+        "sugar" : "3.5",
+        "roughage" : "3",
+        "fat" : "2",
+        "saturated" : "0.5"
+      }
+    ]
+  },
+  {
+    "id" : "7C6113DA-9BFE-4391-88E2-733100DE46DB",
+    "name" : "Weizenprodukte",
+    "products" : [
+      {
+        "id" : "83E2DE0C-2E48-459B-B03F-8BD5124AFAEA",
+        "name" : "Basmatireis",
+        "manufacturer" : "ORYZA",
+        "kcal" : "351",
+        "protein" : "8.8",
+        "carbs" : "75",
+        "sugar" : "0.5",
+        "roughage" : "3.6",
+        "fat" : "1",
+        "saturated" : "0"
+      }
+    ]
+  }
+]
