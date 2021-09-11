@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LogbookProductSectionView: View {
     
+
     @StateObject var cart: Cart
     let category: String
     let date: String
@@ -20,6 +21,7 @@ struct LogbookProductSectionView: View {
         cart.save()
     }
     
+    // Test
     func move(from source: IndexSet, to destination: Int) {
         
         cart.orders.move(fromOffsets: source, toOffset: destination)
