@@ -8,40 +8,49 @@
 import SwiftUI
 
 struct AppTabView: View {
+    
+    @State private var currentTab = 0
+//    @EnvironmentObject var ownProduct: OwnProductConfiguration
+//    @EnvironmentObject var cart: Cart
+     
     var body: some View {
-        TabView {
+        
+        
+        TabView(selection: $currentTab) {
             DashboardView()
                 .tabItem {
-                    Image(systemName: "house.fill")
+                    Image(systemName: "chart.bar.xaxis")
                     Text("Dashboard")
-                }
-            
+                }.tag(0)
+
+
             LogbookView()
                 .tabItem {
-                    Image(systemName: "tray.full.fill")
+                    Image(systemName: "book.closed")
                     Text("Logbuch")
-                }
-            
-            
-            ContentView()
+                }.tag(1)
+
+
+            OwnProductsView()
                 .tabItem {
-                    Image(systemName: "book")
+                    Image(systemName: "list.bullet.rectangle")
                     Text("Lebensmittel")
-                }
-            
+                }.tag(2)
+
             SettingsView()
                 .tabItem {
                     Image(systemName: "gear")
                     Text("Einstellungen")
-                }
+                }.tag(3)
         }
     }
 }
 
 struct AppTabView_Previews: PreviewProvider {
-    static let cart = Cart(date: Date())
     
     static var previews: some View {
-        AppTabView().environmentObject(cart)
+        AppTabView()
+            .environmentObject(Cart())
+            .environmentObject(OwnProductConfiguration())
     }
 }

@@ -8,40 +8,51 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    
+
+    @EnvironmentObject var cart: Cart
+    @EnvironmentObject var ownProduct: OwnProductConfiguration
     @State private var showAmountView = false
-    let product: Product
+    @State private var showEditView = false
+    @State var product: Product
     
     var body: some View {
-        VStack {
-            // placeholder Image
-            Image(product.fullImage)
-                .clipShape(Circle())
-                .padding(.top, 5)
-            Spacer()
-            
+        
+        ZStack {
             Form {
                 productNutritionCollectionView(product: product, modifier: 100)
             }
+            // Titel for Navigation bar
+            .navigationBarTitle(Text(product.name), displayMode: .inline)
+            .navigationBarItems(trailing: Button("Bearbeiten") {
+                self.showEditView = true
+            }).sheet(isPresented: $showEditView, content: {
+                OwnProductEditView(showView: $showEditView, updateProduct: $product, id: product.id)
+                    .environmentObject(ownProduct)
+            })
+            ProductButton(showView: $showAmountView, symbol: "doc.badge.plus", color: Color.blue).sheet(isPresented: $showAmountView, content: {
+                AmountView(showAmountView: $showAmountView, product: product).environmentObject(cart)
+        })
         }
-        
-        // Titel for Navigation bar
-        .navigationBarTitle(Text(product.name), displayMode: .inline)
-        
-        // Button to go to amount view
-        .navigationBarItems(trailing: Button(action: {
-            self.showAmountView = true
-        }, label: {
-            Image(systemName: "plus.circle")
-                .padding(.leading, 20)
-        }).sheet(isPresented: $showAmountView, content: {
-            AmountView(product: product)
-        }))
     }
+
 }
 
+#if DEBUG
 struct ProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductDetailView(product: Product.exampleProduct)
+        
+        
+        Group {
+            NavigationView {
+                ProductDetailView(product: Product.exampleProduct).environmentObject(Cart())
+                    .environment(\.colorScheme, .dark)
+            }
+            
+            NavigationView {
+                ProductDetailView(product: Product.exampleProduct).environmentObject(Cart())
+                    .environment(\.colorScheme, .light)
+            }
+        }
     }
 }
+#endif

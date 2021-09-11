@@ -13,25 +13,21 @@ struct ProductListView: View {
     var product: Product
     
     
-    
     var body: some View {
+        
         NavigationLink(destination: ProductDetailView(product: product)) {
             HStack {
-                Image(product.previewImage)
-                    .clipShape(Circle())
-                    .overlay(Circle().stroke(Color.black, lineWidth: 1))
-                    .shadow(radius: 2)
-                    .padding(.trailing, 2)
-                
                 Group {
                     VStack(alignment: .leading) {
-                        Text(product.name)
-                            .font(.headline)
                         
+                        // if statement is needet that no space will be placed if manufacturer is not included
+                        Text(product.productName)
+                            .font(.headline)
+
                         HStack {
                             
                             // check for protein
-                            if Double(product.protein)! >= 15 {
+                            if Double(product.protein)! >= 12 {
                                 LabelView(text: "Viel Protein", backgroundColor: .green)
                             } else {
                                 LabelView(text: "Wenig Protein", backgroundColor: .blue)
@@ -45,17 +41,17 @@ struct ProductListView: View {
                             }
                             
                             // check for carbs
-                            if Double(product.carbs)! >= 60 {
-                                LabelView(text: "Viel Kohlenhydr.", backgroundColor: .yellow)
+                            if Double(product.carbs)! >= 30 {
+                                LabelView(text: "Viel Kohlenhydrate", backgroundColor: .yellow)
                             } else {
-                                LabelView(text: "Wenig Kohlenhydr.", backgroundColor: .purple)
+                                LabelView(text: "Wenig Kohlenhydrate", backgroundColor: .purple)
                             }
 
                         }
                     }
                 }
-                .padding(.leading, 10)
             }
+            .frame(width: nil, height: 50, alignment: .center)
         }
     }
 }
@@ -66,7 +62,7 @@ struct ProductListView_Previews: PreviewProvider {
     static var previews: some View {
         
         // Using the example product for the detail preview
-            ProductListView(product: Product.exampleProduct)
+        ProductListView(product: Product.exampleProduct)
     }
 }
 #endif

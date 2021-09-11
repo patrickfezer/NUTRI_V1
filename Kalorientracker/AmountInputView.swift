@@ -8,42 +8,45 @@
 import SwiftUI
 
 struct AmountInputView: View {
+    
     @Binding var textInput: String
+    @Binding var TextfieldIsEdeting: Bool
     @State private var showFinishedButton = false
     
     var body: some View {
-        HStack {
+        
+        return HStack {
             HStack {
                 TextField("Menge in g eingeben", text: $textInput, onEditingChanged: { isEdeting in
-                    self.showFinishedButton = true
+                    
+                    showFinishedButton = true
+                    self.TextfieldIsEdeting = true
+                    
                 }, onCommit: {
                 print("OnCommit")
                 })
                 // keyboardType for Textfield
                 .keyboardType(.decimalPad)
-
-                // IMPORTANT: SWIFTUI BUG!! If added to a list, the hole list will be selected as a button, therefore, this button will always be pressed by pressing the finsihed Button
-                
-//                // Clear Button
-//                Button(action: {
-//                    self.textInput = ""
-//                }) {
-//                    Image(systemName: "xmark.circle.fill").opacity(textInput == "" ? 0 : 1).foregroundColor(Color.secondary)
-//                }
             }
             
+            // Finish Button
             if showFinishedButton {
-                Button("Fertig", action: {
-                    self.hideKeyboard()
-                    self.showFinishedButton = false
-                }).foregroundColor(Color(.systemBlue))
+                Button("Fertig") {
+                    hideKeyboard()
+                    showFinishedButton = false
+                    TextfieldIsEdeting = false
+                }
+                .foregroundColor(.blue)
             }
         }
     }
 }
 
 struct AmountInputView_Previews: PreviewProvider {
+    
+    static let cart = Cart()
+    
     static var previews: some View {
-        AmountInputView(textInput: .constant(""))
+        AmountInputView(textInput: .constant(""), TextfieldIsEdeting: .constant(false))
     }
 }
