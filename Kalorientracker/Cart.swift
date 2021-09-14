@@ -33,6 +33,15 @@ class Cart: ObservableObject {
     @Published var destinationLeucin = String()
     @Published var destinationSalt = String()
     
+    // Date Formatter
+    private var dateFormatter: DateFormatter {
+        let df = DateFormatter()
+        df.locale = Locale(identifier: "de_DE")
+        df.dateFormat = "dd.MM.yyyy"
+        
+        return df
+    }
+    
     // saveKeys for the UserDefaults
     static let saveKey = "SavedData"
     let saveKeyKcal = "kcal"
@@ -45,6 +54,7 @@ class Cart: ObservableObject {
     let saveKeyLLeucin = "l-leucin"
     let saveKeySalt = "salt"
     static let savedAmountKey = "SavedAmound"
+    
     
     // MARK: Class Initializer
     init() {
@@ -235,6 +245,12 @@ class Cart: ObservableObject {
         if let index = orders.firstIndex(of: order) {
             orders.remove(at: index)
             save()
+        }
+    }
+    
+    func sortArray() {
+        orders.sort {
+            dateFormatter.date(from: $0.date)! < dateFormatter.date(from: $1.date)!
         }
     }
     

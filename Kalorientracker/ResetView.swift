@@ -8,26 +8,32 @@
 import SwiftUI
 
 struct ResetView: View {
+    
+    // MARK: Variables
     @State private var entrySelection = 0
     @State private var deleteText = ""
     @State private var showConfirmationView = false
     @EnvironmentObject var cart: Cart
+    
+    
     let entrySelectionString = ["30 Einträge", "60 Einträge", "90 Einträge", "120 Einträge", "360 Einträge", "Alle"]
     
+    // MARK: Functions
     func removeAllData() {
         cart.orders.removeAll()
     }
     
     func removeLastEntries(_ entries: Int) {
         
-        // check if count is out of range
-        if entries > self.cart.orders.count {
-            removeAllData()
-        } else {
-            for index in 0..<self.cart.orders.count - entries {
-                self.cart.orders.remove(at: index)
-            }
+        self.cart.sortArray()
+            
+        // Keep the last selected entries
+        if (self.cart.orders.count - entries) >= 0 {
+            self.cart.orders.removeSubrange(0...self.cart.orders.count - entries)
         }
+            
+        // save changes
+        self.cart.save()
     }
     
     var body: some View {
@@ -52,31 +58,29 @@ struct ResetView: View {
                     
                 }
                 .foregroundColor(.red)
+                
                 .actionSheet(isPresented: $showConfirmationView) {
                     ActionSheet(title: Text("Löschen"), message: Text("Die ausgewählten Daten werden unwiederruflich gelöscht."), buttons: [.destructive(Text("Löschen"), action: {
                         
-                        // Sort the array
-                        self.cart.orders.sort {
-                            $0.date < $1.date
+                        DispatchQueue.main.async {
+                            switch entrySelection {
+                            case 0:
+                                removeLastEntries(30)
+                            case 1:
+                                removeLastEntries(60)
+                            case 2:
+                                removeLastEntries(90)
+                            case 3:
+                                removeLastEntries(120)
+                            case 4:
+                                removeLastEntries(360)
+                            case 5:
+                                removeAllData()
+                            default:
+                                break
+                            }
                         }
                         
-                        
-                        switch entrySelection {
-                        case 0:
-                            removeLastEntries(30)
-                        case 1:
-                            removeLastEntries(60)
-                        case 2:
-                            removeLastEntries(90)
-                        case 3:
-                            removeLastEntries(120)
-                        case 4:
-                            removeLastEntries(360)
-                        case 5:
-                            removeAllData()
-                        default:
-                            break
-                        }
 
                     }), .cancel()
                     ])

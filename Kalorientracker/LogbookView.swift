@@ -115,20 +115,15 @@ struct LogbookView: View {
                                             [
                                                 .destructive(Text("Löschen"), action: {
                                                     
-                                                    // Saving all Orders in a seperate array
-                                                    for index in 0..<cart.orders.count {
-                                                        if cart.orders[index].date == dateString {
-                                                            self.ordersToDelete.append(cart.orders[index])
+                                                    // Thread-Priorisierung
+                                                    DispatchQueue.main.async {
+                                                        self.cart.orders.forEach { order in
+                                                            if order.date == dateString {
+                                                                self.cart.remove(order: order)
+                                                            }
                                                         }
                                                     }
                                                     
-                                                    // Delete Orders from cart
-                                                    ordersToDelete.forEach {
-                                                        cart.remove(order: $0)
-                                                    }
-                                                    
-                                                    // Delete all saved orders from array
-                                                    ordersToDelete = []
                                                     
                                                     // Disable edit mode
                                                     editMode = .inactive

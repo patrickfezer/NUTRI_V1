@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ResetListView: View {
     var body: some View {
-        NavigationLink("Zurücksetzen", destination: ResetView())
+        NavigationLink("Speichermanagement", destination: ResetView())
     }
 }
 

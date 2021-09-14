@@ -16,7 +16,7 @@ struct OwnProductOrder: Identifiable, Codable {
 
 class OwnProductConfiguration: ObservableObject {
     @Published var products = [OwnProductOrder]()
-    let saveKey = "ownProduct"
+    public let saveKey = "ownProduct"
     
     func add(order: OwnProductOrder) {
         self.products.append(order)

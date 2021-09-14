@@ -14,7 +14,7 @@ struct ContactView: View {
     @State private var showFeedbackSheet = false
     @State private var showMailAlertView = false
     let mailAlert = Alert(title: Text("Apple Mail nicht gefunden."), message: Text("Zum Verwenden dieser Funktion muss die standard Mail-App von Apple installiert & konfiguriert sein."), dismissButton: .default(Text("Ok")))
-    let appInformationString = "\n\n________________\nVersion: \(KalorientrackerApp.appVersion + " (\(KalorientrackerApp.buildVersion))")\nDevice: \(KalorientrackerApp.devive)\n \(KalorientrackerApp.systemVersion)"
+    let appInformationString = "\n\n________________\nVersion: \(AppInformation.appVersion + " (\(AppInformation.buildVersion))")\nDevice: \(AppInformation.devive)\n \(AppInformation.systemVersion)"
     
     // needed for MailView
     @State private var result: Result<MFMailComposeResult, Error>? = nil
