@@ -21,7 +21,6 @@ struct LogbookProductSectionView: View {
     }
     
     func move(from source: IndexSet, to destination: Int) {
-        
         cart.orders.move(fromOffsets: source, toOffset: destination)
         cart.save()
     }

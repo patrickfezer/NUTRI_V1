@@ -16,9 +16,10 @@ struct AmountView: View {
     @State private var orderFinished = false
     @State private var showText = false
     @State private var textFieldIsEdeting = false
-    @Binding var showAmountView: Bool
     @State private var convertedText: Double = 0
     @State private var chosedCategorie = 0
+    
+    @Binding var showAmountView: Bool
     
     // array with possible categories
     static let categorie = ["Mahlzeit 1", "Mahlzeit 2", "Mahlzeit 3", "Mahlzeit 4", "Mahlzeit 5", "Mahlzeit 6", "Mahlzeit 7", "Mahlzeit 8", "Mahlzeit 9", "Mahlzeit 10", "Mahlzeit 11", "Mahlzeit 12"]

@@ -48,7 +48,6 @@ struct OwnProductsView: View {
                     }
                 }
                 .add(searchBar)
-//                .id(UUID())
                 .listStyle(GroupedListStyle())
                 .navigationBarTitle("Lebensmittel", displayMode: .automatic)
                 .navigationBarItems(trailing: EditButton().disabled(ownProduct.products.isEmpty))
@@ -66,6 +65,6 @@ struct OwnProductsView: View {
 
 struct OwnProductsView_Previews: PreviewProvider {
     static var previews: some View {
-        OwnProductsView()
+        OwnProductsView().environmentObject(OwnProductConfiguration())
     }
 }

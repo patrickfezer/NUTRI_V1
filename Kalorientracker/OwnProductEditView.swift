@@ -38,23 +38,24 @@ struct OwnProductEditView: View {
                     
                     if !blockRefresh {
                         blockRefresh = true
-                        for index in 0..<ownProduct.products.count {
-                            if ownProduct.products[index].product.id == id {
-                                productName = ownProduct.products[index].product.name
-                                manufacturer = ownProduct.products[index].product.manufacturer
-                                kcal = ownProduct.products[index].product.kcal
-                                fat = ownProduct.products[index].product.fat
-                                saturated = ownProduct.products[index].product.saturated
-                                carbs = ownProduct.products[index].product.carbs
-                                roughage = ownProduct.products[index].product.roughage
-                                sugar = ownProduct.products[index].product.sugar
-                                protein = ownProduct.products[index].product.protein
-                                leucin = ownProduct.products[index].product.leucin
-                                salt = ownProduct.products[index].product.salt
-                                
-                                chosedCategoryAsString = ownProduct.products[index].category
+                        
+                        ownProduct.products.forEach { productCollection in
+
+                            // Check product fo needed id
+                            if productCollection.product.id == id {
+                                productName = productCollection.product.name
+                                manufacturer = productCollection.product.manufacturer
+                                kcal = productCollection.product.kcal
+                                fat = productCollection.product.fat
+                                saturated = productCollection.product.saturated
+                                carbs = productCollection.product.carbs
+                                roughage = productCollection.product.roughage
+                                sugar = productCollection.product.sugar
+                                protein = productCollection.product.protein
+                                leucin = productCollection.product.leucin
+                                salt = productCollection.product.salt
+                                chosedCategoryAsString = productCollection.category
                                 chosedCategory = ProductAmountInputView.category.firstIndex(of: chosedCategoryAsString) ?? ProductAmountInputView.category.count - 1
-                                break
                             }
                         }
                     }

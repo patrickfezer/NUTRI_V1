@@ -9,7 +9,15 @@ import SwiftUI
 
 struct ContactListView: View {
     var body: some View {
-        NavigationLink("Kontakt", destination: ContactView())
+        
+        NavigationLink {
+            ContactView()
+        } label: {
+            LabelIconView(icon: "envelope.fill", iconColor: .white, backgroundColor: .blue, text: "Kontakt")
+        }
+
+        
+//        NavigationLink("Kontakt", destination: ContactView())
     }
 }
 

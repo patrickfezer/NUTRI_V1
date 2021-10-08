@@ -117,14 +117,14 @@ struct LogbookView: View {
                                                     
                                                     // Thread-Priorisierung
                                                     DispatchQueue.main.async {
+
+                                                        
                                                         self.cart.orders.forEach { order in
                                                             if order.date == dateString {
                                                                 self.cart.remove(order: order)
                                                             }
                                                         }
                                                     }
-                                                    
-                                                    
                                                     // Disable edit mode
                                                     editMode = .inactive
                                                     
@@ -136,9 +136,6 @@ struct LogbookView: View {
                         })
                         .animation(.default)
                 }
-                
-                
-                
             }
         }
         

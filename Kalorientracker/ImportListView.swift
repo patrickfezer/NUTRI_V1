@@ -11,13 +11,20 @@ struct ImportListView: View {
     var body: some View {
 //        NavigationLink("Importieren", destination: ImportView())
         
-        NavigationLink(destination: ImportView()) {
-            HStack {
-                Text("Importieren")
-                Spacer()
-                BetaSignView(text: "Beta")
-            }
+        NavigationLink {
+            ImportView()
+        } label: {
+            LabelIconView(icon: "square.and.arrow.down", iconColor: .white, backgroundColor: .orange, text: "Importieren")
         }
+
+        
+//        NavigationLink(destination: ImportView()) {
+//            HStack {
+//                Text("Importieren")
+//                Spacer()
+//                BetaSignView(text: "Beta")
+//            }
+//        }
     }
 }
 

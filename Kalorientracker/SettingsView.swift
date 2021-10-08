@@ -10,10 +10,10 @@ import SwiftUI
 struct SettingsView: View {
     
     @State private var input = "0"
-    @EnvironmentObject var cart: Cart
     @State private var show = false
-    let dev = false
-    
+    @EnvironmentObject var cart: Cart
+    @EnvironmentObject var appData: AppData
+
     let url = "https://testflight.apple.com/join/SBQywh44"
     
     
@@ -38,8 +38,8 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("Backup")) {
-                    ExportListView()
                     ImportListView()
+                    ExportListView()
                 }
                 
                 Section {
@@ -47,9 +47,7 @@ struct SettingsView: View {
                         
                         HStack {
                             
-                            Image(systemName: "ant.circle")
-                            Text("Teilnahme am TestFlight Betaprogramm")
-                            Spacer()
+                            LabelIconView(icon: "ant.fill", iconColor: .white, backgroundColor: .blue, text: "Teilnahme am TestFlight Betaprogramm")
                         }
                         
                     }
@@ -61,9 +59,12 @@ struct SettingsView: View {
 
 
                 
-                if dev {
-                    Section(header: Text("Test")) {
-                        TestListView()
+                if AppData.devMode {
+                    Section(header: Text("Dev Settings")) {
+//                        TestListView()
+                        Button("DEV BUTTON") {
+                            appData.appsFirstStart = false
+                        }
                     }
                 }
                 

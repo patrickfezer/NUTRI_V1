@@ -24,6 +24,12 @@ extension View {
     }
 }
 
+extension TabView {
+    func doNo() {
+        
+    }
+}
+
 
 extension String {
     

@@ -24,9 +24,6 @@ struct ImportView: View {
                 
                 NavigationLink("Logbuch importeiren", destination: LogbookImportView())
             })
-            
-            Text("Sollte die Datei nicht auswählbar sein, ändere bitte manuell die Dateiendung auf .JSON")
-                .font(.system(size: 15))
         }
         
         // NavigationBar settings

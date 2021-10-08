@@ -9,7 +9,15 @@ import SwiftUI
 
 struct ResetListView: View {
     var body: some View {
-        NavigationLink("Speichermanagement", destination: ResetView())
+        
+        NavigationLink {
+            ResetView()
+        } label: {
+            LabelIconView(icon: "internaldrive.fill", iconColor: .white, backgroundColor: .blue, text: "Speichermanagement")
+        }
+
+
+//        NavigationLink("Speichermanagement", destination: ResetView())
     }
 }
 

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct FirstStartApp: View {
     @EnvironmentObject var cart: Cart
@@ -38,6 +39,7 @@ struct FirstStartApp: View {
                                 cart.saveProductValues()
                                 showView.toggle()
                                 appData.saveValue()
+                                WidgetCenter.shared.reloadAllTimelines()
                             }, label: {
                                 HStack {
                                     Spacer()

@@ -8,7 +8,6 @@
 import WidgetKit
 import SwiftUI
 
-
 // MARK: Preview with constant Values
 let BarViewWithConstantValues = BarViewEntry(date: Date(), BarKcal: BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount:                                                      2800, currentAmount: 2350, showUnit: false),
                                              BarFat: BarForWidgetView(title: "Fett", color: .red, destinationAmount: 60, currentAmount: 45, showUnit: true),
@@ -40,8 +39,7 @@ struct BarViewEntry: TimelineEntry {
 // MARK: Provider
 struct Provider: TimelineProvider {
     
-    // MARK: Saved Data
-
+//  MARK: Saved Data
     @AppStorage("destinationAmounts", store: UserDefaults(suiteName: "group.com.fezer.Kalorientracker"))
     var destinationAmounts: Data = Data()
     
@@ -59,7 +57,6 @@ struct Provider: TimelineProvider {
         
         print("Updatet current amounts")
         return getterCurrentAmounts
-        
     }
     
     var getDestinationAmounts: [String : String] {
@@ -89,7 +86,6 @@ struct Provider: TimelineProvider {
     
     // MARK: TimeLine
     func getTimeline(in context: Context, completion: @escaping (Timeline<BarViewEntry>) -> Void) {
-
         
         let entry = BarViewEntry(date: Date(), BarKcal: BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount: CGFloat(Double(getDestinationAmounts["kcal"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["kcal"]!), showUnit: false),
             BarFat: BarForWidgetView(title: "Fett", color: .red, destinationAmount: CGFloat(Double(getDestinationAmounts["fat"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["fat"]!), showUnit: true),
@@ -124,6 +120,7 @@ struct WidgetEntryView: View {
     let entry: Provider.Entry
 
     @Environment (\.widgetFamily) private var widgetFamily
+    
     
     var body: some View {
         

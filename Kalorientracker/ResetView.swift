@@ -10,85 +10,107 @@ import SwiftUI
 struct ResetView: View {
     
     // MARK: Variables
-    @State private var entrySelection = 0
+    @AppStorage(ResetView.saveKeyentrySelection) private var entrySelection = 0
+    @AppStorage(ResetView.saveKeyAutoDelete) private var autoDelete = false
     @State private var deleteText = ""
     @State private var showConfirmationView = false
     @EnvironmentObject var cart: Cart
+    @EnvironmentObject var productCollection: OwnProductConfiguration
     
     
-    let entrySelectionString = ["30 Einträge", "60 Einträge", "90 Einträge", "120 Einträge", "360 Einträge", "Alle"]
+    static let saveKeyAutoDelete = "keyAutoDelete"
+    static let saveKeyentrySelection = "keyEntrySelection"
     
-    // MARK: Functions
-    func removeAllData() {
-        cart.orders.removeAll()
-    }
-    
-    func removeLastEntries(_ entries: Int) {
-        
-        self.cart.sortArray()
-            
-        // Keep the last selected entries
-        if (self.cart.orders.count - entries) >= 0 {
-            self.cart.orders.removeSubrange(0...self.cart.orders.count - entries)
+    let entrySelectionString = ["30 Einträge", "60 Einträge", "90 Einträge", "120 Einträge", "360 Einträge", "Alle löschen"]
+
+    var deletePickerText: String {
+        var dt = ""
+
+        switch entrySelection {
+        case 5:
+            dt = "Löschen"
+        default:
+            dt = "Behalten"
         }
-            
-        // save changes
-        self.cart.save()
+        
+        return dt
     }
     
+    static func entriesToRemove() -> Int {
+        var entries = 0
+        
+        switch ResetView().entrySelection {
+        case 0:
+            entries = 30
+        case 1:
+            entries = 60
+        case 2:
+            entries = 90
+        case 3:
+            entries = 120
+        case 4:
+            entries = 365
+        default:
+            break
+        }
+        
+        return entries
+    }
+
     var body: some View {
         Form {
             
-            Section(header: Text("Logbucheinträge Löschen")) {
+            Section {
+                HStack {
+                    Text("Einträge Lebensmittel: ")
+                    Spacer()
+                    Text("\(self.productCollection.products.count)")
+                    
+                }
+            } header: {
+                Text("Lebensmittel")
+            }
+            
+            Section(header: Text("Logbucheinträge")) {
+                
+                HStack {
+                    Text("Logbucheinträge: ")
+                    Spacer()
+                    Text("\(self.cart.orders.count)")
+                }
                 
                 
-                Text(deleteText)
-                
-                Picker("Logbucheinträge", selection: $entrySelection) {
+                Picker(deletePickerText, selection: $entrySelection) {
+                            
                     ForEach(0..<entrySelectionString.count) {
                         Text(entrySelectionString[$0])
                     }
                 }
                 .pickerStyle(DefaultPickerStyle())
                 
-                Button("Löschen") {
-                    
-                    showConfirmationView = true
-                    
-                    
-                }
-                .foregroundColor(.red)
+                Text(deleteText)
                 
-                .actionSheet(isPresented: $showConfirmationView) {
-                    ActionSheet(title: Text("Löschen"), message: Text("Die ausgewählten Daten werden unwiederruflich gelöscht."), buttons: [.destructive(Text("Löschen"), action: {
-                        
-                        DispatchQueue.main.async {
-                            switch entrySelection {
-                            case 0:
-                                removeLastEntries(30)
-                            case 1:
-                                removeLastEntries(60)
-                            case 2:
-                                removeLastEntries(90)
-                            case 3:
-                                removeLastEntries(120)
-                            case 4:
-                                removeLastEntries(360)
-                            case 5:
-                                removeAllData()
-                            default:
-                                break
-                            }
-                        }
-                        
-
-                    }), .cancel()
-                    ])
+                Toggle(isOn: $autoDelete) {
+                    Text("Automatisch löschen")
                 }
+                .onChange(of: autoDelete) { value in
+                    showConfirmationView = value
+                }
+                
+
+                    Button("Löschen") {
+                        showConfirmationView = true
+                    }
+                    .foregroundColor(autoDelete ? .secondary : .red)
+                    .disabled(autoDelete)
+                
             }
+            
+
         }
-        .navigationBarTitle(Text("Zurücksetzen"), displayMode: .inline)
+        .navigationBarTitle(Text("Speichermanagement"), displayMode: .inline)
         .onAppear(perform: {
+            
             switch entrySelection {
             case 0:
                 deleteText = "Die letzten \(entrySelectionString[0]) werden behalten."
@@ -106,12 +128,33 @@ struct ResetView: View {
                 deleteText = "Keine Auswahl."
             }
         })
+        .actionSheet(isPresented: $showConfirmationView) {
+            ActionSheet(title: Text("Löschen"), message: Text("Die ausgewählten Daten werden unwiederruflich gelöscht."), buttons: [.destructive(Text("Löschen"), action: {
+
+                DispatchQueue.main.async {
+                    
+                    self.cart.removeOldOrders()
+                    
+                }
+                
+                UserDefaults.standard.set(autoDelete, forKey: ResetView.saveKeyAutoDelete)
+            }), .cancel({
+                // Der Toggel wird auf den letzten Wert zurück gesetzt, falls abgebrochen wird
+                autoDelete = false
+            })
+            ])
+        }
+        .onChange(of: self.entrySelection) { change in
+            self.cart.removeOldOrders()
+        }
     }
 }
 
 struct ResetView_Previews: PreviewProvider {
     static var previews: some View {
         ResetView()
+            .environmentObject(Cart())
+            .environmentObject(OwnProductConfiguration())
     }
 }
 

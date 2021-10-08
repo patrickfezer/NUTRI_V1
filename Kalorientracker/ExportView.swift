@@ -6,54 +6,39 @@
 //
 
 import SwiftUI
+//import UniformTypeIdentifiers
+
+
+
 
 struct ExportView: View {
-    @State private var showFoodExporter = false
     
-    func getData(saveKey: String) {
-        
-        guard let data = UserDefaults.standard.data(forKey: saveKey) else {
-            return
-        }
-        
-        
-        let av = UIActivityViewController(activityItems: [data], applicationActivities: nil)
-        
-  
-        UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
-
-    }
-    
-
-
-
     var body: some View {
         Form {
             
-            Section(header: Text("Lebensmittel")) {
-                Button {
-                    print("Export Food Button pressed")
-                     getData(saveKey: OwnProductConfiguration().saveKey)
-                    
+            Section {
+                NavigationLink {
+                    FoodExportView()
                 } label: {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Lebensmittel exportieren")
-                    }
+                    Text("Lebensmittel exportieren")
                 }
+
+            } header: {
+                Text("Lebensmittel")
             }
             
-            Section(header: Text("Logbuch")) {
-                Button {
-                    print("Export Logbook Button pressed")
-                    getData(saveKey: Cart.saveKey)
+            
+            Section {
+                NavigationLink {
+                    LogbookExportView()
                 } label: {
-                    HStack {
-                        Image(systemName: "square.and.arrow.up")
-                        Text("Logbuch exportieren")
-                    }
+                    Text("Logbuch exportieren")
                 }
+
+            } header: {
+                Text("Logbuch")
             }
+
 
         }
         .navigationTitle(Text("Exportieren"))
@@ -66,3 +51,49 @@ struct ExportView_Previews: PreviewProvider {
         ExportView()
     }
 }
+
+
+// Alte Funktionen
+// =========================================================================================
+//struct Doc: FileDocument {
+//    var content: String
+//    
+//    static var readableContentTypes: [UTType]{[.json]}
+//    
+//    init(contet: String) {
+//        self.content = contet
+//    }
+//    
+//    init(configuration: ReadConfiguration) throws {
+//        guard let data = configuration.file.regularFileContents, let encoded = String(data: data, encoding: .utf8) else {
+//            throw CocoaError(.fileReadCorruptFile)
+//        }
+//        
+//        content = encoded
+//    }
+//    
+//    func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+//        return FileWrapper(regularFileWithContents: content.data(using: .utf8)!)
+//    }
+//    
+//    
+//}
+
+
+// =========================================================================================
+//func getData(saveKey: String) {
+//
+//
+//
+//    guard let data = UserDefaults.standard.data(forKey: saveKey) else {
+//        return
+//    }
+//
+//    let encoded = String(decoding: data, as: UTF8.self)
+//
+//    let av = UIActivityViewController(activityItems: [encoded], applicationActivities: nil)
+//
+//
+//    UIApplication.shared.windows.first?.rootViewController?.present(av, animated: true, completion: nil)
+//
+//}

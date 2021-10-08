@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 
 // order
@@ -32,6 +33,7 @@ class Cart: ObservableObject {
     @Published var destinationSugar = String()
     @Published var destinationLeucin = String()
     @Published var destinationSalt = String()
+    @AppStorage(ResetView.saveKeyentrySelection) private var entrySelection = 0
     
     // Date Formatter
     private var dateFormatter: DateFormatter {
@@ -229,6 +231,38 @@ class Cart: ObservableObject {
     func save() {
         if let encoded = try? JSONEncoder().encode(self.orders) {
             UserDefaults.standard.set(encoded, forKey: Self.saveKey)
+            print("saved changes")
+        }
+    }
+    
+    // Remove all Orders
+    func removeAllOrders() {
+        orders.removeAll()
+        save()
+    }
+    
+    
+    func removeOldOrders() {
+        
+        var entries: Int {
+            var temp = 0
+            
+            switch entrySelection {
+            case 5:
+                removeAllOrders()
+            default:
+                temp = ResetView.entriesToRemove()
+            }
+            
+            return temp
+        }
+        
+        sortArray()
+        
+        
+        if (orders.count - entries) > 0 {
+            orders.removeSubrange(0...orders.count - (entries + 1))
+            save()
         }
     }
     
@@ -239,11 +273,12 @@ class Cart: ObservableObject {
         print("product added to cart and saved")
     }
     
-    // remove from order -- not really used because of the IndexSet
+    // Remove order
     func remove(order: Order) {
 
         if let index = orders.firstIndex(of: order) {
             orders.remove(at: index)
+            print("Removed order at array position: \(index)")
             save()
         }
     }

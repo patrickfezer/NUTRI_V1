@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct DestinationAmountView: View {
     @EnvironmentObject var cart: Cart
@@ -39,6 +40,10 @@ struct DestinationAmountView: View {
                     ActionSheet(title: Text("Zurücksetzen"), message: Text("Alle Zielwerte werden unwiederruflich gelöscht."), buttons: [
                         .destructive(Text("Löschen"), action: {
                             cart.deleteAllProductValues()
+                            
+                            DispatchQueue.main.async {
+                                WidgetCenter.shared.reloadAllTimelines()
+                            }
                         }),
                         .cancel()
                     ])
@@ -52,6 +57,7 @@ struct DestinationAmountView: View {
             self.hideKeyboard()
             self.showFinishButton = false
             cart.saveProductValues()
+            WidgetCenter.shared.reloadAllTimelines()
         }).disabled(!showFinishButton)
         )
         .navigationBarBackButtonHidden(showFinishButton)

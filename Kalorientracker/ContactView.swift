@@ -35,8 +35,7 @@ struct ContactView: View {
                     
                 }, label: {
                     HStack {
-                        Image(systemName: "envelope")
-                        Text("Support")
+                        LabelIconView(icon: "questionmark.circle", iconColor: .white, backgroundColor: .blue, text: "Support")
                     }
                     
                     // support mail sheet declaration
@@ -61,10 +60,12 @@ struct ContactView: View {
                     }
                     
                 }, label: {
-                    HStack {
-                        Image(systemName: "envelope")
-                        Text("Feedback")
-                    }
+//                    HStack {
+//                        Image(systemName: "envelope")
+//                        Text("Feedback")
+//                    }
+                    
+                    LabelIconView(icon: "exclamationmark.circle", iconColor: .white, backgroundColor: .blue, text: "Feedback")
                    
                     // feedback mail sheet declaration
                 }).sheet(isPresented: self.$showFeedbackSheet, content: {

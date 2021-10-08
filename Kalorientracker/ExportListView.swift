@@ -11,13 +11,19 @@ struct ExportListView: View {
     var body: some View {
 //        NavigationLink("Exportieren", destination: ExportView())
         
-        NavigationLink(destination: ExportView()) {
-            HStack {
-                Text("Exportieren")
-                Spacer()
-                BetaSignView(text: "Beta")
-            }
+        NavigationLink {
+            ExportView()
+        } label: {
+            LabelIconView(icon: "square.and.arrow.up", iconColor: .white, backgroundColor: .green, text: "Exportieren")
         }
+        
+//        NavigationLink(destination: ExportView()) {
+//            HStack {
+//                Text("Exportieren")
+//                Spacer()
+//                BetaSignView(text: "Beta")
+//            }
+//        }
     }
 }
 

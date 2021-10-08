@@ -12,7 +12,15 @@ struct DestinationAmountListView: View {
     @EnvironmentObject var cart: Cart
     
     var body: some View {
-        NavigationLink("Zielwerte einstellen", destination: DestinationAmountView().environmentObject(cart))
+        
+        NavigationLink {
+            DestinationAmountView().environmentObject(cart)
+        } label: {
+            LabelIconView(icon: "pin.fill", iconColor: .white, backgroundColor: .red, text: "Zielwerte einstellen")
+        }
+
+        
+//        NavigationLink("Zielwerte einstellen", destination: DestinationAmountView().environmentObject(cart))
     }
 }
 

@@ -22,6 +22,10 @@
 		5A21005726EF5AF800AB6204 /* ImportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21005626EF5AF800AB6204 /* ImportView.swift */; };
 		5A21005A26EFB06B00AB6204 /* TestListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21005926EFB06B00AB6204 /* TestListView.swift */; };
 		5A21005D26EFB08A00AB6204 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21005C26EFB08A00AB6204 /* TestView.swift */; };
+		5A21174C26F1EEC700CCF542 /* LogbookExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21174B26F1EEC700CCF542 /* LogbookExportView.swift */; };
+		5A21174E26F1EED100CCF542 /* FoodExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21174D26F1EED100CCF542 /* FoodExportView.swift */; };
+		5A21175026F1EF2B00CCF542 /* ExportHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21174F26F1EF2B00CCF542 /* ExportHelper.swift */; };
+		5A21175326F1EF9100CCF542 /* Doc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21175226F1EF9100CCF542 /* Doc.swift */; };
 		5A239F80253DEC66004E1394 /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A69C50E253DE18A005CB4A0 /* AppData.swift */; };
 		5A241E4C25272F4700867BD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A1AA76F250BB859001BAE8E /* LaunchScreen.storyboard */; };
 		5A29013B250811C0003E48F6 /* MailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A29013A250811C0003E48F6 /* MailView.swift */; };
@@ -33,6 +37,7 @@
 		5A3804CA25017C0500D9FAF4 /* Shapes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3804C925017C0500D9FAF4 /* Shapes.swift */; };
 		5A394E3724FE5C3300E046A6 /* LogbookProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A394E3624FE5C3300E046A6 /* LogbookProductDetailView.swift */; };
 		5A394E3924FE5C7700E046A6 /* LogbookProductListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A394E3824FE5C7700E046A6 /* LogbookProductListView.swift */; };
+		5A45767626F7599900BE6CAF /* LabelIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45767526F7599900BE6CAF /* LabelIconView.swift */; };
 		5A47423C24FEE2EC000E5222 /* PrintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A47423B24FEE2EC000E5222 /* PrintHelper.swift */; };
 		5A49F0DB2509588F00476CD7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49F0C32509587000476CD7 /* WidgetKit.framework */; platformFilter = ios; };
 		5A49F0DC2509588F00476CD7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49F0C52509587000476CD7 /* SwiftUI.framework */; };
@@ -129,6 +134,10 @@
 		5A21005626EF5AF800AB6204 /* ImportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportView.swift; sourceTree = "<group>"; };
 		5A21005926EFB06B00AB6204 /* TestListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestListView.swift; sourceTree = "<group>"; };
 		5A21005C26EFB08A00AB6204 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		5A21174B26F1EEC700CCF542 /* LogbookExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookExportView.swift; sourceTree = "<group>"; };
+		5A21174D26F1EED100CCF542 /* FoodExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodExportView.swift; sourceTree = "<group>"; };
+		5A21174F26F1EF2B00CCF542 /* ExportHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportHelper.swift; sourceTree = "<group>"; };
+		5A21175226F1EF9100CCF542 /* Doc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Doc.swift; sourceTree = "<group>"; };
 		5A29013A250811C0003E48F6 /* MailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailView.swift; sourceTree = "<group>"; };
 		5A2A7F11250A7810004BD9BF /* WidgetViewExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WidgetViewExtension.entitlements; sourceTree = "<group>"; };
 		5A2E051C2503B2910011DA50 /* InformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationView.swift; sourceTree = "<group>"; };
@@ -138,6 +147,7 @@
 		5A3804C925017C0500D9FAF4 /* Shapes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shapes.swift; sourceTree = "<group>"; };
 		5A394E3624FE5C3300E046A6 /* LogbookProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookProductDetailView.swift; sourceTree = "<group>"; };
 		5A394E3824FE5C7700E046A6 /* LogbookProductListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogbookProductListView.swift; sourceTree = "<group>"; };
+		5A45767526F7599900BE6CAF /* LabelIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelIconView.swift; sourceTree = "<group>"; };
 		5A47423B24FEE2EC000E5222 /* PrintHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrintHelper.swift; sourceTree = "<group>"; };
 		5A49F0C32509587000476CD7 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		5A49F0C52509587000476CD7 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -264,6 +274,7 @@
 		5A21004E26EF554C00AB6204 /* BackupView */ = {
 			isa = PBXGroup;
 			children = (
+				5A21175126F1EF6700CCF542 /* Doc & Helper */,
 				5A5AEE7726F098E70022706A /* ImportViews */,
 				5A5AEE7626F098DD0022706A /* ExportViews */,
 			);
@@ -277,6 +288,15 @@
 				5A5AEE7826F0BE2E0022706A /* TestViews */,
 			);
 			name = DeveloperViews;
+			sourceTree = "<group>";
+		};
+		5A21175126F1EF6700CCF542 /* Doc & Helper */ = {
+			isa = PBXGroup;
+			children = (
+				5A21174F26F1EF2B00CCF542 /* ExportHelper.swift */,
+				5A21175226F1EF9100CCF542 /* Doc.swift */,
+			);
+			name = "Doc & Helper";
 			sourceTree = "<group>";
 		};
 		5A29012F2507D44A003E48F6 /* Sheet View */ = {
@@ -320,6 +340,14 @@
 				5A3804C925017C0500D9FAF4 /* Shapes.swift */,
 			);
 			name = Shapes;
+			sourceTree = "<group>";
+		};
+		5A45767426F7597B00BE6CAF /* LabelViews */ = {
+			isa = PBXGroup;
+			children = (
+				5A45767526F7599900BE6CAF /* LabelIconView.swift */,
+			);
+			name = LabelViews;
 			sourceTree = "<group>";
 		};
 		5A49F0C22509587000476CD7 /* Frameworks */ = {
@@ -375,24 +403,6 @@
 			name = DateSelectionView;
 			sourceTree = "<group>";
 		};
-		5A5101672506502E0043908E /* Product Amount View */ = {
-			isa = PBXGroup;
-			children = (
-				5A515BB024F9120900558DB3 /* AmountView.swift */,
-				5A6D750124FA8F4D004EDD53 /* AmountInputView.swift */,
-			);
-			name = "Product Amount View";
-			sourceTree = "<group>";
-		};
-		5A510168250650400043908E /* Product Amounts */ = {
-			isa = PBXGroup;
-			children = (
-				5A515BAE24F9021300558DB3 /* productNutritionView.swift */,
-				5A6D750724FAD296004EDD53 /* productNutritionCollectionView.swift */,
-			);
-			name = "Product Amounts";
-			sourceTree = "<group>";
-		};
 		5A510173250683250043908E /* Change Amount */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,6 +440,8 @@
 			children = (
 				5A21005026EF556E00AB6204 /* ExportListView.swift */,
 				5A21005226EF557D00AB6204 /* ExportView.swift */,
+				5A21174B26F1EEC700CCF542 /* LogbookExportView.swift */,
+				5A21174D26F1EED100CCF542 /* FoodExportView.swift */,
 			);
 			name = ExportViews;
 			sourceTree = "<group>";
@@ -525,10 +537,11 @@
 		5A8E26C62512088500E6F472 /* ProductView */ = {
 			isa = PBXGroup;
 			children = (
+				5AFCA61C251F981D00A8080D /* Product Button */,
 				5A818934250CDED800220253 /* ProductListView */,
 				5AE551E424FBC3A100899F55 /* Product Detail */,
-				5AE551E524FBC3B300899F55 /* Product Amount */,
-				5A8E26E925121BF800E6F472 /* List View */,
+				5AE551E524FBC3B300899F55 /* ProductAmountView */,
+				5A8E26E925121BF800E6F472 /* ListView */,
 				5A8E26DB2512122400E6F472 /* Product Configuration */,
 			);
 			name = ProductView;
@@ -545,14 +558,13 @@
 			name = "Product Configuration";
 			sourceTree = "<group>";
 		};
-		5A8E26E925121BF800E6F472 /* List View */ = {
+		5A8E26E925121BF800E6F472 /* ListView */ = {
 			isa = PBXGroup;
 			children = (
-				5AFCA61C251F981D00A8080D /* Product Button */,
 				5A8E26CD251208B200E6F472 /* OwnProductsView.swift */,
 				5AF7E12725165CC400B6F0B6 /* OwnProductFilteredListView.swift */,
 			);
-			name = "List View";
+			name = ListView;
 			sourceTree = "<group>";
 		};
 		5AA4326A24F7F5040088424F = {
@@ -604,6 +616,7 @@
 		5AA4328524F7F5100088424F /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5A45767426F7597B00BE6CAF /* LabelViews */,
 				5A5AEE7C26F0CF200022706A /* WebView */,
 				5A21005B26EFB07300AB6204 /* DeveloperViews */,
 				5A05544F25247F50008C9D52 /* Main Files */,
@@ -668,17 +681,19 @@
 			isa = PBXGroup;
 			children = (
 				5AA4329C24F8031E0088424F /* ProductDetailView.swift */,
+				5A515BAE24F9021300558DB3 /* productNutritionView.swift */,
+				5A6D750724FAD296004EDD53 /* productNutritionCollectionView.swift */,
 			);
 			name = "Product Detail";
 			sourceTree = "<group>";
 		};
-		5AE551E524FBC3B300899F55 /* Product Amount */ = {
+		5AE551E524FBC3B300899F55 /* ProductAmountView */ = {
 			isa = PBXGroup;
 			children = (
-				5A510168250650400043908E /* Product Amounts */,
-				5A5101672506502E0043908E /* Product Amount View */,
+				5A515BB024F9120900558DB3 /* AmountView.swift */,
+				5A6D750124FA8F4D004EDD53 /* AmountInputView.swift */,
 			);
-			name = "Product Amount";
+			name = ProductAmountView;
 			sourceTree = "<group>";
 		};
 		5AFCA61C251F981D00A8080D /* Product Button */ = {
@@ -835,8 +850,10 @@
 				5AACD7122519F3CF0027A548 /* OwnProductEditView.swift in Sources */,
 				5A0C3AE325024011008AE6C7 /* DestinationAmountView.swift in Sources */,
 				5A8E26DD2512123F00E6F472 /* ProductConfigurationAmountInputView.swift in Sources */,
+				5A21174C26F1EEC700CCF542 /* LogbookExportView.swift in Sources */,
 				5A3577BC251BC01F0097521A /* ProductAmountInputView.swift in Sources */,
 				5A21005126EF556E00AB6204 /* ExportListView.swift in Sources */,
+				5A21174E26F1EED100CCF542 /* FoodExportView.swift in Sources */,
 				5A51016E250655E20043908E /* DatePickerButtonView.swift in Sources */,
 				5A51015F25060E640043908E /* EachMealTotalView.swift in Sources */,
 				5A6D750224FA8F4D004EDD53 /* AmountInputView.swift in Sources */,
@@ -856,12 +873,15 @@
 				5A69C50F253DE18A005CB4A0 /* AppData.swift in Sources */,
 				5A510165250647190043908E /* EachMealTotalAmountView.swift in Sources */,
 				5A8E26CE251208B200E6F472 /* OwnProductsView.swift in Sources */,
+				5A21175026F1EF2B00CCF542 /* ExportHelper.swift in Sources */,
 				5AC9B9B9250010FE0066030C /* LogbookProductSectionView.swift in Sources */,
+				5A21175326F1EF9100CCF542 /* Doc.swift in Sources */,
 				5ADCAE3225027ADC00E71D3E /* DestinationAmountListView.swift in Sources */,
 				5A47423C24FEE2EC000E5222 /* PrintHelper.swift in Sources */,
 				5AC5428726DA1DDB00720123 /* ResetListView.swift in Sources */,
 				5A8E26D82512110D00E6F472 /* ProductConfigurationView.swift in Sources */,
 				5A6D750024FA8CE7004EDD53 /* Extensions.swift in Sources */,
+				5A45767626F7599900BE6CAF /* LabelIconView.swift in Sources */,
 				5A515BB124F9120900558DB3 /* AmountView.swift in Sources */,
 				5A818939250D102000220253 /* SearchBar.swift in Sources */,
 				5A06796024F832F500AA45B8 /* SettingsView.swift in Sources */,
@@ -902,7 +922,7 @@
 				CODE_SIGN_ENTITLEMENTS = WidgetViewExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				INFOPLIST_FILE = WidgetView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -910,7 +930,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fezer.Kalorientracker.WidgetView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -929,7 +949,7 @@
 				CODE_SIGN_ENTITLEMENTS = WidgetViewExtension.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				INFOPLIST_FILE = WidgetView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -937,7 +957,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fezer.Kalorientracker.WidgetView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1073,7 +1093,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kalorientracker/Kalorientracker.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_ASSET_PATHS = "\"Kalorientracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				ENABLE_PREVIEWS = YES;
@@ -1083,7 +1103,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fezer.Kalorientracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -1102,7 +1122,7 @@
 				CODE_SIGN_ENTITLEMENTS = Kalorientracker/Kalorientracker.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 57;
 				DEVELOPMENT_ASSET_PATHS = "\"Kalorientracker/Preview Content\"";
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				ENABLE_PREVIEWS = YES;
@@ -1112,7 +1132,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.4.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.fezer.Kalorientracker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

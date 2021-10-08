@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InformationView: View {
     
-    @State private var tabBar = UITabBar()
+    @State private var showWebView = false
     
     let url = "https://www.fezerapps.com/nutri-datenschutzerklaerung/"
     
@@ -18,7 +18,7 @@ struct InformationView: View {
             
             // App information
             Section {
-                HStack { 
+                HStack {
                     Text("Version:")
                     Spacer()
                     Text(AppInformation.appVersion + " (\(AppInformation.buildVersion))")
@@ -29,31 +29,16 @@ struct InformationView: View {
 
             // Datenschutz
             Section {
-                
-                Link(destination: URL(string: url)!) {
-                    HStack {
-                        Image(systemName: "hand.raised.fill")
-                        Text("Datenschutzerklärung")
-                    }
-                }
-                
-//                NavigationLink {
-//                    WebView(url: url)
-//                        .navigationTitle(Text("Datenschutzerklärung"))
-//                        .onAppear {
-//                            self.tabBar.isHidden = true
-//                        }
-//                        .onDisappear {
-//                            self.tabBar.isHidden = false
-//                        }
-//                } label: {
+                Button {
+                    showWebView.toggle()
+                } label: {
+                    
+                    LabelIconView(icon: "hand.raised.fill", iconColor: .white, backgroundColor: .blue, text: "Datenschutzerklärung")
 //                    HStack {
 //                        Image(systemName: "hand.raised.fill")
 //                        Text("Datenschutzerklärung")
 //                    }
-//                }
-
-                
+                }
             } header: {
                 Text("Datenschutz")
             }
@@ -62,6 +47,39 @@ struct InformationView: View {
         .listStyle(GroupedListStyle())
         .navigationBarTitle("Infos", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
+        .sheet(isPresented: $showWebView) {
+            showWebView = false
+        } content: {
+            
+            
+            if #available(iOS 15.0, *) {
+                NavigationView {
+                    WebView(url: url)
+                        .navigationTitle(Text("Datenschutzerklärung"))
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarItems(trailing: Button(action: {
+                            showWebView = false
+                        }, label: {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundColor(.secondary)
+                        }))
+                }.interactiveDismissDisabled(true) // Only available in iOS 15 or later
+            } else {
+                // iOS 14
+                NavigationView {
+                    WebView(url: url)
+                        .navigationTitle(Text("Datenschutzerklärung"))
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationBarItems(trailing: Button(action: {
+                            showWebView = false
+                        }, label: {
+                            Image(systemName: "x.circle.fill")
+                                .foregroundColor(.secondary)
+                        }))
+                }
+            }
+            
+        }
     }
 }
 

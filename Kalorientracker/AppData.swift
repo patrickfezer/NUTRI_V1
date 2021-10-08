@@ -8,23 +8,18 @@
 import SwiftUI
 
 class AppData: ObservableObject {
-    @Published var firstStart = Bool()
-    let saveKey = "firstStart"
+    let saveKey: String = "firstStart"
+    @Published var appsFirstStart: Bool
+    static var devMode = true
+    
+    
     
     func saveValue() {
-        firstStart = false
-        if let encoded = try? JSONEncoder().encode(firstStart) {
-            UserDefaults.standard.set(encoded, forKey: saveKey)
-        }
+        appsFirstStart = true
+        UserDefaults.standard.set(appsFirstStart, forKey: saveKey)
     }
     
     init() {
-        if let firstStartOfApp = UserDefaults.standard.data(forKey: saveKey) {
-            if let decoded = try? JSONDecoder().decode(Bool.self, from: firstStartOfApp) {
-                firstStart = decoded
-            }
-        } else {
-            firstStart = true
-        }
+        appsFirstStart = UserDefaults.standard.bool(forKey: saveKey)
     }
 }

@@ -15,8 +15,8 @@ struct StartScreen: View {
     @EnvironmentObject var ownProduct: OwnProductConfiguration
     var body: some View {
         
-        if appData.firstStart {
-            FirstStartApp(showView: $appData.firstStart)
+        if !appData.appsFirstStart {
+            FirstStartApp(showView: $appData.appsFirstStart)
                 .environmentObject(cart)
                 .environmentObject(appData)
         } else {
