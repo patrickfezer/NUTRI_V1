@@ -13,7 +13,7 @@ struct ProductConfigurationAmountInputView: View {
     
     var body: some View {
         HStack {
-            TextField(nutritionName, text: $amountInput)
+            TextField.init(nutritionName, text: $amountInput)
             .keyboardType(.decimalPad)
         }
     }

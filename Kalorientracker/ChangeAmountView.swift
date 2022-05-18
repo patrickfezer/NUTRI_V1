@@ -91,14 +91,16 @@ struct ChangeAmountView: View {
                 Section(header: Text("Kategorie & Datum")) {
                     Picker("Kategorie", selection: $chosedCategorie) {
                         
-                        ForEach(0 ..< AmountView.categorie.count) {
+                        ForEach(0 ..< AmountView.categorie.count, id: \.self) {
                             Text(AmountView.categorie[$0])
                             
                         }
+                        
                     }
                     
                     // DatePicker
                     DatePickerListView(date: $cart.date)
+                    
                 }
                 
                 productNutritionCollectionView(product: product, modifier: Double(String.convertToDouble(textInput)) ?? modifier)

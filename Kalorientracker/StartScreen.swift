@@ -12,26 +12,31 @@ import SwiftUI
 struct StartScreen: View {
     @EnvironmentObject var cart: Cart
     @EnvironmentObject var appData: AppData
-    @EnvironmentObject var ownProduct: OwnProductConfiguration
+    @EnvironmentObject var ownProduct: CollectedProductOrder
+
     var body: some View {
+        
         
         if !appData.appsFirstStart {
             FirstStartApp(showView: $appData.appsFirstStart)
                 .environmentObject(cart)
                 .environmentObject(appData)
+                .navigationViewStyle(StackNavigationViewStyle())
         } else {
             AppTabView()
                 .environmentObject(cart)
                 .environmentObject(ownProduct)
+                .navigationViewStyle(StackNavigationViewStyle())
         }
     }
+
 }
 
 struct StartScreen_Previews: PreviewProvider {
     static var previews: some View {
         StartScreen()
             .environmentObject(Cart())
-            .environmentObject(OwnProductConfiguration())
+            .environmentObject(CollectedProductOrder())
             .environmentObject(AppData())
     }
 }

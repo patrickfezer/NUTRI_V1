@@ -17,7 +17,8 @@ struct AmountInputView: View {
         
         return HStack {
             HStack {
-                TextField("Menge in g eingeben", text: $textInput, onEditingChanged: { isEdeting in
+                
+                TextField.init("Menge in g eingeben", text: $textInput, onEditingChanged: { isEdeting in
                     
                     showFinishedButton = true
                     self.TextfieldIsEdeting = true

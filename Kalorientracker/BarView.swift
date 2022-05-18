@@ -9,11 +9,16 @@ import SwiftUI
 
 struct BarView: View {
     
-    let title: String
+    let title: Text
     let color: Color
     let destinationAmount: CGFloat
     let currentAmount: CGFloat
     let showUnit: Bool
+    var label: Text {
+        
+        return title + Text(":")
+        
+    }
     
     var body: some View {
         
@@ -43,7 +48,7 @@ struct BarView: View {
         
         return HStack {
             
-            Text(title + ":")
+            label
                 .foregroundColor(.primary)
             
             Spacer()
@@ -74,9 +79,7 @@ struct BarView: View {
 
 struct BarView_Previews: PreviewProvider {
     static var previews: some View {
-//        Form {
-            BarView(title: "Kalorien", color: .blue, destinationAmount: 400, currentAmount: 20, showUnit: false)
+            BarView(title: Text("calories"), color: .blue, destinationAmount: 400, currentAmount: 20, showUnit: false)
                 .environment(\.colorScheme, .light)
-//        }
     }
 }

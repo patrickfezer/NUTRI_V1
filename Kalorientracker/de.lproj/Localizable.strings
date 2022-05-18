@@ -1,0 +1,75 @@
+/* 
+  Localizable.strings
+  Kalorientracker
+
+  Created by Patrick Fezer on 13.10.21.
+  
+*/
+
+// MARK: AppTabView
+"dashboard" = "Dashboard";
+"logbook" = "Logbuch";
+"foods" = "Lebensmittel";
+"settings" = "Einstellungen";
+
+// MARK: Settings
+
+// List View
+"destinationValues" = "Zielwerte einstellen";
+"contact" = "Kontakt";
+"information" = "Informationen";
+"storageManagement" = "Speichermanagement";
+"import" = "Importieren";
+"export" = "Exportieren";
+"TestFlightParticipation" = "Teilnahme am Testflight Betaprogramm";
+"settings" = "Einstellungen";
+
+// Destination Values
+"destinationText" = "Hier kannst du deine persönlichen Zielwerte eintragen. \nGibst du in einem Feld keinen Wert an, so wird im Dashboard das zugehörige Balkendiagramm nicht angezeigt.";
+"calories" = "Kalorien";
+"far" = "Fett";
+"saturated" = "Gesättigte Fettsäuren";
+"carbs" = "Carbs";
+"roughage" = "Ballaststoffe";
+"sugar" = "Zucker";
+"protein" = "Protein";
+"leucine" = "L-Leucine";
+"salt" = "Salz";
+"reset" = "Zurücksetzen";
+"resetWarningText" = "Alle Zielwerte werden unwiderruflich gelöscht.";
+"delete" = "Löschen";
+"cancel" = "Abbrechen";
+"destinationSelection" = "Trainingsplan";
+"destinationTitle" = "Zielwerte";
+
+// App Information
+"appInfo" = "App Informationen";
+"info" = "Informationen";
+"version" = "Version";
+"privacy" = "Datenschutz";
+"privacyProtection" = "Datenschutzerklärung";
+"webSite" = "Webseite";
+
+// Mail
+"mailNotFoundWarningDescription" = "Zum Verwenden dieser Funktion muss die standard Mail-App von Apple installiert & konfiguriert sein.";
+"mailNotFoundWarningTitle" = "Apple Mail nicht gefunden.";
+
+
+// Debugging
+"dev" = "Developer-Mode";
+
+
+// MARK: Dashboard
+"cal" = "Kalorien";
+"fat" = "Fett";
+"satturated" = "Ges. Fetts.";
+"carbs" = "Carbs";
+"roughage" = "Ballastst.";
+"sugar" = "Zucker";
+"protein" = "Protein";
+"leucine" = "L-Leucin";
+"salt" = "Salz";
+
+// defaults
+"done" = "Fertig";
+"finish" = "Weiter";

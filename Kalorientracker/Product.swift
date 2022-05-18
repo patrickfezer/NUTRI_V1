@@ -49,8 +49,11 @@ struct Product: Codable, Identifiable, Equatable {
         return fullImage + "_preview"
     }
     
+    static let emtptyProduct = Product(id: UUID(), name: "", manufacturer: "", kcal: "", protein: "", carbs: "", sugar: "", roughage: "", fat: "", saturated: "", leucin: "", salt: "")
+    
+    
     // example product for debugging the app -- all views for Debugging preview need to be in if debug statement
     #if DEBUG
-    static let exampleProduct = Product(id: UUID(), name: "Rumpsteak", manufacturer: "", kcal: "130", protein: "22.4", carbs: "0", sugar: "0", roughage: "0", fat: "4.5", saturated: "3", leucin: "1.583", salt: "0.6")
+    static let exampleProduct = Product(id: UUID(), name: "Rumpsteak", manufacturer: "", kcal: "130", protein: "22.4", carbs: "0", sugar: "0", roughage: "0", fat: "4.5", saturated: "3", leucin: "1.5", salt: "0.6")
     #endif
 }

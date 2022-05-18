@@ -18,7 +18,6 @@ struct AmountView: View {
     @State private var textFieldIsEdeting = false
     @State private var convertedText: Double = 0
     @State private var chosedCategorie = 0
-    
     @Binding var showAmountView: Bool
     
     // array with possible categories
@@ -48,7 +47,7 @@ struct AmountView: View {
                         
                         // picker to choose the catergory
                         Picker("Kategorie", selection: $chosedCategorie) {
-                            ForEach(0 ..< AmountView.categorie.count) {
+                            ForEach(0 ..< AmountView.categorie.count, id: \.self) {
                                 Text(AmountView.categorie[$0])
                             }
                             
@@ -83,6 +82,8 @@ struct AmountView: View {
                     
                     // add order to cart
                     cart.add(order: order)
+                    
+                    print("Modifier: \(order.modifier)")
                     
                     // removing the text input
                     textInput = ""

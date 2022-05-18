@@ -244,25 +244,20 @@ class Cart: ObservableObject {
     
     func removeOldOrders() {
         
-        var entries: Int {
-            var temp = 0
+        // Amount of entries to keep
+        let entries = ResetView.entriesToRemove()
+        
+        switch entrySelection {
+        case 5:
+            removeAllOrders()
+        default:
             
-            switch entrySelection {
-            case 5:
-                removeAllOrders()
-            default:
-                temp = ResetView.entriesToRemove()
+            if (orders.count - entries) > 0 {
+                sortArray()
+                orders.removeSubrange(0...orders.count - (entries + 1))
+                save()
             }
             
-            return temp
-        }
-        
-        sortArray()
-        
-        
-        if (orders.count - entries) > 0 {
-            orders.removeSubrange(0...orders.count - (entries + 1))
-            save()
         }
     }
     

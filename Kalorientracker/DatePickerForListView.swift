@@ -32,11 +32,13 @@ struct DatePickerForListView: View {
             }
             .navigationBarHidden(true)
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
 struct DatePickerForListView_Previews: PreviewProvider {
     static var previews: some View {
         DatePickerForListView(date: .constant(Date()))
+        
     }
 }

@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductDetailView: View {
 
     @EnvironmentObject var cart: Cart
-    @EnvironmentObject var ownProduct: OwnProductConfiguration
+    @EnvironmentObject var ownProduct: CollectedProductOrder
     @State private var showAmountView = false
     @State private var showEditView = false
     @State var product: Product
@@ -23,13 +23,17 @@ struct ProductDetailView: View {
             }
             // Titel for Navigation bar
             .navigationBarTitle(Text(product.name), displayMode: .inline)
+            
             .navigationBarItems(trailing: Button("Bearbeiten") {
                 self.showEditView = true
+                
             }).sheet(isPresented: $showEditView, content: {
-                OwnProductEditView(showView: $showEditView, updateProduct: $product, id: product.id)
+                ProductEditView(showView: $showEditView, originalProduct: $product, id: product.id)
                     .environmentObject(ownProduct)
             })
-            ProductButton(showView: $showAmountView, symbol: "doc.badge.plus", color: Color.blue).sheet(isPresented: $showAmountView, content: {
+            ProductButton(showView: $showAmountView, symbol: "doc.badge.plus", color: Color.blue)
+                
+                .sheet(isPresented: $showAmountView, content: {
                 AmountView(showAmountView: $showAmountView, product: product).environmentObject(cart)
         })
         }

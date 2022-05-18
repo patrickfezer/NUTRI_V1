@@ -10,7 +10,6 @@ import SwiftUI
 @main
 struct KalorientrackerApp: App {
     @EnvironmentObject var appData: AppData
-    let saveKey = "firstStart"
     var body: some Scene {
         
         WindowGroup {
@@ -18,7 +17,9 @@ struct KalorientrackerApp: App {
             StartScreen()
                 .environmentObject(Cart())
                 .environmentObject(AppData())
-                .environmentObject(OwnProductConfiguration())
+                .environmentObject(CollectedProductOrder())
+                // set up language
+//                .environment(\.locale, Locale(identifier: "de"))
         }
     }
 }
@@ -27,9 +28,9 @@ struct KalorientrackerApp_Previews: PreviewProvider {
 
     
     static var previews: some View {
-        Text("Hello, World!")
+        StartScreen()
             .environmentObject(Cart())
-            .environmentObject(OwnProductConfiguration())
+            .environmentObject(AppData())
+            .environmentObject(CollectedProductOrder())
     }
 }
-

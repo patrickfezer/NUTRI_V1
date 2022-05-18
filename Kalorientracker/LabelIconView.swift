@@ -12,7 +12,7 @@ struct LabelIconView: View {
     let icon: String
     let iconColor: Color
     let backgroundColor: Color
-    let text: String
+    let text: Text
 
     
     var body: some View {
@@ -28,7 +28,8 @@ struct LabelIconView: View {
                 .background(backgroundColor)
                 .cornerRadius(6)
             
-            Text(text)
+            // Show the Text
+            text
         }
         
     }
@@ -36,6 +37,6 @@ struct LabelIconView: View {
 
 struct LabelIconView_Previews: PreviewProvider {
     static var previews: some View {
-        LabelIconView(icon: "envelope.fill", iconColor: .white, backgroundColor: .blue, text: "Weiter")
+        LabelIconView(icon: "envelope.fill", iconColor: .white, backgroundColor: .blue, text: Text("Weiter"))
     }
 }

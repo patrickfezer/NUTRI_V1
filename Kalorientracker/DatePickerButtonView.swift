@@ -30,7 +30,8 @@ struct DatePickerButtonView: View {
                     
                     Text(dateString)
                 }
-            }).sheet(isPresented: $showDatePicker, content: {
+            })
+            .sheet(isPresented: $showDatePicker, content: {
                 DatePickerView(date: $date, showView: $showDatePicker)
         })
 

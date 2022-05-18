@@ -10,27 +10,27 @@ import SwiftUI
 struct LogbookProductDetailView: View {
     
     @EnvironmentObject var cart: Cart
+    @State private var showChangeAmountView = false
     var product: Product
     var id: UUID
-    @State private var showChangeAmountView = false
+    let productModifier: Double
     
-    // products applyed modifier
-    var productModifier: Double {
-        
-        var temp: Double = 0
-        
-        for index in 0..<cart.orders.count {
-            
-            if cart.orders[index].id == id {
-                temp = cart.orders[index].modifier
-                cart.save()
-                break
-            }
-            
-        }
-        
-        return temp
-    }
+//    // products applyed modifier
+//    var productModifier: Double {
+//
+//        var temp: Double = 0
+//
+//        for index in 0..<cart.orders.count {
+//
+//            if cart.orders[index].id == id {
+//                temp = cart.orders[index].modifier
+//                cart.save()
+//                break
+//            }
+//
+//        }
+//        return temp
+//    }
     
     var body: some View {
         ZStack {
@@ -53,7 +53,7 @@ struct LogbookProductDetailView: View {
 struct LogbookProductDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            LogbookProductDetailView(product: Product.exampleProduct, id: UUID()).environmentObject(Cart())
+            LogbookProductDetailView(product: Product.exampleProduct, id: UUID(), productModifier: 100).environmentObject(Cart())
         }
     }
 }

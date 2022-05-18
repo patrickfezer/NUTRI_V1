@@ -38,7 +38,7 @@ struct BarForWidgetView: View {
             if destinationAmount != 0 {
                 return temp
             } else {
-                return chartLength
+                return 0
             }
         }
         
@@ -72,6 +72,7 @@ struct BarForWidgetView: View {
             ZStack(alignment: .center) {
                 ZStack(alignment: .leading) {
                     RoundedShape().frame(width: chartLength, height: 25)
+                        .opacity(0.75)
                         .foregroundColor(.secondary)
                     RoundedShape().frame(width: progressLenght, height: 25)
                         .foregroundColor(color)
@@ -91,7 +92,7 @@ struct BarForWidgetView: View {
 struct BarForWidgetView_Previews: PreviewProvider {
     static var previews: some View {
         BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount: 400, currentAmount: 20, showUnit: false)
-            .environment(\.colorScheme, .light)
+            .preferredColorScheme(.dark)
             .background(Color("WidgetBackground"))
     }
 }

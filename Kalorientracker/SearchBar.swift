@@ -7,10 +7,18 @@
 
 import SwiftUI
 
-class SearchBar: NSObject, ObservableObject {
+class SearchBar: NSObject, ObservableObject, UISearchResultsUpdating {
     
     @Published var text: String = ""
     let searchController: UISearchController = UISearchController(searchResultsController: nil)
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        // Publish search bar text changes.
+        if let searchBarText = searchController.searchBar.text {
+            self.text = searchBarText
+        }
+    }
     
     override init() {
         super.init()
@@ -19,16 +27,6 @@ class SearchBar: NSObject, ObservableObject {
     }
 }
 
-extension SearchBar: UISearchResultsUpdating {
-   
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        // Publish search bar text changes.
-        if let searchBarText = searchController.searchBar.text {
-            self.text = searchBarText
-        }
-    }
-}
 
 struct SearchBarModifier: ViewModifier {
     
@@ -51,3 +49,4 @@ extension View {
         return self.modifier(SearchBarModifier(searchBar: searchBar))
     }
 }
+

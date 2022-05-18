@@ -19,31 +19,29 @@ struct EachMealTotalView: View {
         var values : [String : Double] = ["kcal" : 0, "fat" : 0, "saturated" : 0, "carbs" : 0, "roughage" : 0, "sugar" : 0, "protein" : 0, "leucin" : 0, "salt" : 0]
         
         
-        for index  in 0..<cart.orders.count {
-            if cart.orders[index].meal == filter && cart.orders[index].date == date {
+        cart.orders.forEach { order in
+            if order.meal == filter && order.date == date {
+                let modifier = Double(order.modifier)
                 
-                let modifier = Double(cart.orders[index].modifier)
+                values["kcal"]! += Double(order.product.kcal)! / 100 * modifier
                 
-                values["kcal"]! += Double(cart.orders[index].product.kcal)! / 100 * modifier
+                values["fat"]! += Double(order.product.fat)! / 100 * modifier
                 
-                values["fat"]! += Double(cart.orders[index].product.fat)! / 100 * modifier
+                values["saturated"]! += Double(order.product.saturated)! / 100 * modifier
                 
-                values["saturated"]! += Double(cart.orders[index].product.saturated)! / 100 * modifier
+                values["carbs"]! += Double(order.product.carbs)! / 100 * modifier
                 
-                values["carbs"]! += Double(cart.orders[index].product.carbs)! / 100 * modifier
+                values["roughage"]! += Double(order.product.roughage)! / 100 * modifier
                 
-                values["roughage"]! += Double(cart.orders[index].product.roughage)! / 100 * modifier
+                values["sugar"]! += Double(order.product.sugar)! / 100 * modifier
                 
-                values["sugar"]! += Double(cart.orders[index].product.sugar)! / 100 * modifier
+                values["protein"]! += Double(order.product.protein)! / 100 * modifier
                 
-                values["protein"]! += Double(cart.orders[index].product.protein)! / 100 * modifier
+                values["leucin"]! += Double(order.product.leucin)! / 100 * modifier
                 
-                values["leucin"]! += Double(cart.orders[index].product.leucin)! / 100 * modifier
-                
-                values["salt"]! += Double(cart.orders[index].product.salt)! / 100 * modifier
+                values["salt"]! += Double(order.product.salt)! / 100 * modifier
             }
         }
-        
         return values
     }
 

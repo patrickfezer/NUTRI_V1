@@ -15,7 +15,7 @@ struct ResetView: View {
     @State private var deleteText = ""
     @State private var showConfirmationView = false
     @EnvironmentObject var cart: Cart
-    @EnvironmentObject var productCollection: OwnProductConfiguration
+    @EnvironmentObject var productCollection: CollectedProductOrder
     
     
     static let saveKeyAutoDelete = "keyAutoDelete"
@@ -82,7 +82,7 @@ struct ResetView: View {
                 
                 Picker(deletePickerText, selection: $entrySelection) {
                             
-                    ForEach(0..<entrySelectionString.count) {
+                    ForEach(0..<entrySelectionString.count, id: \.self) {
                         Text(entrySelectionString[$0])
                     }
                 }
@@ -97,19 +97,21 @@ struct ResetView: View {
                     showConfirmationView = value
                 }
                 
-
+                if !autoDelete {
+                    
+                    
                     Button("Löschen") {
                         showConfirmationView = true
                     }
                     .foregroundColor(autoDelete ? .secondary : .red)
-                    .disabled(autoDelete)
-                
-            }
-            
+                }
 
+            }
         }
+        .animation(.default, value: autoDelete)
         .navigationBarTitle(Text("Speichermanagement"), displayMode: .inline)
         .onAppear(perform: {
+            
             
             switch entrySelection {
             case 0:
@@ -145,7 +147,8 @@ struct ResetView: View {
             ])
         }
         .onChange(of: self.entrySelection) { change in
-            self.cart.removeOldOrders()
+//            self.cart.removeOldOrders()
+            autoDelete = false
         }
     }
 }
@@ -154,7 +157,7 @@ struct ResetView_Previews: PreviewProvider {
     static var previews: some View {
         ResetView()
             .environmentObject(Cart())
-            .environmentObject(OwnProductConfiguration())
+            .environmentObject(CollectedProductOrder())
     }
 }
 

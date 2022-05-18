@@ -9,8 +9,8 @@ import SwiftUI
 
 struct LabelView: View {
     
-    var text: String
-    var backgroundColor: Color
+    let text: String
+    let backgroundColor: Color
     
     var body: some View {
         Text(text)

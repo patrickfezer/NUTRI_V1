@@ -12,7 +12,7 @@ struct DatePickerView: View {
     // binding vars to give out the day anad close the view -- used as a .sheet action
     @Binding var date: Date
     @Binding var showView: Bool
-    
+    @EnvironmentObject var cart: Cart
     
     var body: some View {
         

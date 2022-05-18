@@ -17,7 +17,7 @@ struct LogbookProductListView: View {
     var body: some View {
         
         // taking the modifier using id of product
-        NavigationLink(destination: LogbookProductDetailView(product: product, id: id)) {
+        NavigationLink(destination: LogbookProductDetailView(product: product, id: id, productModifier: modifier)) {
             HStack {
                 Text(product.name)
                 Spacer()

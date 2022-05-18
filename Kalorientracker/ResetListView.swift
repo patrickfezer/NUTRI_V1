@@ -13,7 +13,7 @@ struct ResetListView: View {
         NavigationLink {
             ResetView()
         } label: {
-            LabelIconView(icon: "internaldrive.fill", iconColor: .white, backgroundColor: .blue, text: "Speichermanagement")
+            LabelIconView(icon: "internaldrive.fill", iconColor: .white, backgroundColor: .blue, text: Text("storageManagement"))
         }
 
 

@@ -56,6 +56,7 @@ class Coordinator: NSObject, MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController,
                                didFinishWith result: MFMailComposeResult,
                                error: Error?) {
+        // Code in defer wird immer ausgeführt! 
         defer {
             $presentation.wrappedValue.dismiss()
         }

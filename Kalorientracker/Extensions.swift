@@ -7,16 +7,6 @@
 
 import SwiftUI
 
-// For Textfield in Searchbar. hideKeyboard is also possible
-extension UIApplication {
-    func endEditing(_ force: Bool) {
-        self.windows
-            .filter{$0.isKeyWindow}
-            .first?
-            .endEditing(force)
-    }
-}
-
 // Used for Amount view
 extension View {
     func hideKeyboard() {
@@ -24,24 +14,13 @@ extension View {
     }
 }
 
-extension TabView {
-    func doNo() {
-        
-    }
-}
-
-
 extension String {
-    
-    static func replaceDotWithComma(_ input: String) -> String {
-        return input.replacingOccurrences(of: ".", with: ",")
-    }
     
     static func validDouble(_ input: String) -> String {
          var temp = ""
      
          if input == "" || Double(input.replacingOccurrences(of: ",", with: ".")) == nil {
-             temp = "0"
+             temp = "0" // 0 War der Wer vor der Änderung
          } else {
              temp = input.replacingOccurrences(of: ",", with: ".")
          }
@@ -49,6 +28,7 @@ extension String {
          return temp
      }
     
+    // \s+ matches one or more whitespace characters, and $ matches the end of the string.
     func trimTrailingWhitespaces() -> String {
             return self.replacingOccurrences(of: "\\s+$", with: "", options: .regularExpression)
         }

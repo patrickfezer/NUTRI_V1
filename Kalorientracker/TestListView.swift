@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct TestListView: View {
+    
+    let title: String
     var body: some View {
-        NavigationLink("TestView", destination: TestView2())
+        NavigationLink(title, destination: TestView2())
     }
 }
 
 struct TestListView_Previews: PreviewProvider {
     static var previews: some View {
-        TestListView()
+        TestListView(title: "dev")
     }
 }

@@ -20,7 +20,7 @@ struct ProductConfigurationView: View {
     @State private var leucin = ""
     @State private var salt = ""
     @Binding var showSheet: Bool
-    @EnvironmentObject var ownProduct: OwnProductConfiguration
+    @EnvironmentObject var productOrder: CollectedProductOrder
     let saveKey = "ownProducts"
     
     
@@ -36,9 +36,9 @@ struct ProductConfigurationView: View {
                 self.showSheet = false
             }, trailing: Button("Fertig") {
                 
-                ownProduct.add(order: OwnProductOrder(product: Product(id: UUID(), name: productName, manufacturer: manufacturer.trimTrailingWhitespaces(), kcal: String.validDouble(kcal), protein: String.validDouble(protein), carbs: String.validDouble(carbs), sugar: String.validDouble(sugar), roughage: String.validDouble(roughage), fat: String.validDouble(fat), saturated: String.validDouble(saturated), leucin: String.validDouble(leucin), salt: String.validDouble(salt)), category: ProductAmountInputView.category[self.chosedCategory]))
+                productOrder.add(order: ProductOrder(product: Product(id: UUID(), name: productName, manufacturer: manufacturer.trimTrailingWhitespaces(), kcal: String.validDouble(kcal), protein: String.validDouble(protein), carbs: String.validDouble(carbs), sugar: String.validDouble(sugar), roughage: String.validDouble(roughage), fat: String.validDouble(fat), saturated: String.validDouble(saturated), leucin: String.validDouble(leucin), salt: String.validDouble(salt)), category: ProductAmountInputView.category[self.chosedCategory]))
 
-                ownProduct.save()
+                productOrder.save()
                 
                 self.showSheet = false
             }.disabled(productName == ""))
@@ -48,6 +48,6 @@ struct ProductConfigurationView: View {
 
 struct ProductConfigurationView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductConfigurationView(showSheet: .constant(true)).environmentObject(OwnProductConfiguration())
+        ProductConfigurationView(showSheet: .constant(true)).environmentObject(CollectedProductOrder())
     }
 }

@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+struct ButtonLabel: View {
+    var body: some View {
+        Image(systemName: "xmark")
+            .resizable()
+            .frame(width: 12, height: 12, alignment: .center)
+            .foregroundColor(.primary)
+            .padding(10)
+            .background(Color.secondary)
+            .clipShape(Circle())
+    }
+}
+
 struct InformationView: View {
     
     @State private var showWebView = false
@@ -19,12 +31,12 @@ struct InformationView: View {
             // App information
             Section {
                 HStack {
-                    Text("Version:")
+                    Text("version")
                     Spacer()
                     Text(AppInformation.appVersion + " (\(AppInformation.buildVersion))")
                 }
             } header: {
-                Text("App Informationen")
+                Text("appInfo")
             }
 
             // Datenschutz
@@ -33,53 +45,57 @@ struct InformationView: View {
                     showWebView.toggle()
                 } label: {
                     
-                    LabelIconView(icon: "hand.raised.fill", iconColor: .white, backgroundColor: .blue, text: "Datenschutzerklärung")
-//                    HStack {
-//                        Image(systemName: "hand.raised.fill")
-//                        Text("Datenschutzerklärung")
-//                    }
+                    LabelIconView(icon: "hand.raised.fill", iconColor: .white, backgroundColor: .blue, text: Text("privacyProtection"))
                 }
             } header: {
-                Text("Datenschutz")
+                Text("privacy")
+            }
+            
+            
+            
+            Section {
+                
+                Link(destination: URL(string: "https://www.fezerapps.com")!) {
+                    LabelIconView(icon: "globe", iconColor: .white, backgroundColor: .blue, text: Text("webSite"))
+                }
+
+            } header: {
+                Text("webSite")
             }
 
         }
         .listStyle(GroupedListStyle())
-        .navigationBarTitle("Infos", displayMode: .inline)
+        .navigationBarTitle("info", displayMode: .inline)
         .listStyle(InsetGroupedListStyle())
-        .sheet(isPresented: $showWebView) {
+        .sheet(isPresented: $showWebView, onDismiss: {
             showWebView = false
-        } content: {
-            
-            
+        }, content: {
             if #available(iOS 15.0, *) {
                 NavigationView {
                     WebView(url: url)
-                        .navigationTitle(Text("Datenschutzerklärung"))
+                        .navigationTitle(Text("privacyProtection"))
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(trailing: Button(action: {
                             showWebView = false
                         }, label: {
-                            Image(systemName: "x.circle.fill")
-                                .foregroundColor(.secondary)
+                            ButtonLabel()
+    
                         }))
                 }.interactiveDismissDisabled(true) // Only available in iOS 15 or later
             } else {
                 // iOS 14
                 NavigationView {
                     WebView(url: url)
-                        .navigationTitle(Text("Datenschutzerklärung"))
+                        .navigationTitle(Text("privacyProtection"))
                         .navigationBarTitleDisplayMode(.inline)
                         .navigationBarItems(trailing: Button(action: {
                             showWebView = false
                         }, label: {
-                            Image(systemName: "x.circle.fill")
-                                .foregroundColor(.secondary)
+                            ButtonLabel()
                         }))
                 }
             }
-            
-        }
+        })
     }
 }
 
@@ -87,6 +103,19 @@ struct InformationView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             InformationView()
+                .colorScheme(.dark)
+        }
+        
+        NavigationView {
+            InformationView()
+        }
+    }
+}
+
+struct ButtonLabel_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            ButtonLabel()
         }
     }
 }

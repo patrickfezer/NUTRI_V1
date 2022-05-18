@@ -13,9 +13,9 @@ struct DashboardView: View {
     @State private var showDateView = false
     
     // MARK: AppData
-    @AppStorage("destinationAmounts", store: UserDefaults(suiteName: "group.com.fezer.Kalorientracker"))
+    @AppStorage("destinationAmounts", store: UserDefaults(suiteName: "group.com.fezer.shared"))
     var destinationAmounts: Data = Data()
-    @AppStorage("currentAmounts", store: UserDefaults(suiteName: "group.com.fezer.Kalorientracker"))
+    @AppStorage("currentAmounts", store: UserDefaults(suiteName: "group.com.fezer.shared"))
     var currentAmounts: Data = Data()
 
     
@@ -40,39 +40,39 @@ struct DashboardView: View {
                 Section(header: Text("Tageswerte")) {
                     
                     if cart.destinationKcal != "" && cart.destinationKcal != "0" {
-                        BarView(title: "Kalorien", color: .blue, destinationAmount: CGFloat(Double(cart.destinationKcal.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["kcal"]!), showUnit: false)
+                        BarView(title: Text("calories"), color: .blue, destinationAmount: CGFloat(Double(cart.destinationKcal.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["kcal"]!), showUnit: false)
                     }
                     
                     if cart.destinationFat != "" && cart.destinationFat != "0" {
-                        BarView(title: "Fett", color: .red, destinationAmount: CGFloat(Double(cart.destinationFat.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["fat"]!), showUnit: true)
+                        BarView(title: Text("fat"), color: .red, destinationAmount: CGFloat(Double(cart.destinationFat.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["fat"]!), showUnit: true)
                     }
                     
                     if cart.destinationSaturated != "" && cart.destinationSaturated != "0" {
-                        BarView(title: "Ges. Fetts.", color: .red, destinationAmount: CGFloat(Double(cart.destinationSaturated.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["saturated"]!), showUnit: true)
+                        BarView(title: Text("saturated"), color: .red, destinationAmount: CGFloat(Double(cart.destinationSaturated.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["saturated"]!), showUnit: true)
                     }
                     
                     if cart.destinationCarbs != "" && cart.destinationCarbs != "0" {
-                        BarView(title: "Carbs", color: .orange, destinationAmount: CGFloat(Double(cart.destinationCarbs.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["carbs"]!), showUnit: true)
+                        BarView(title: Text("carbs"), color: .orange, destinationAmount: CGFloat(Double(cart.destinationCarbs.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["carbs"]!), showUnit: true)
                     }
                     
                     if cart.destinationRoughage != "" && cart.destinationRoughage != "0" {
-                        BarView(title: "Ballastst.", color: .orange, destinationAmount: CGFloat(Double(cart.destinationRoughage.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["roughage"]!), showUnit: true)
+                        BarView(title: Text("roughage"), color: .orange, destinationAmount: CGFloat(Double(cart.destinationRoughage.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["roughage"]!), showUnit: true)
                     }
                     
                     if cart.destinationSugar != "" && cart.destinationSugar != "0" {
-                        BarView(title: "Zucker", color: .orange, destinationAmount: CGFloat(Double(cart.destinationSugar.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["sugar"]!), showUnit: true)
+                        BarView(title: Text("sugar"), color: .orange, destinationAmount: CGFloat(Double(cart.destinationSugar.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["sugar"]!), showUnit: true)
                     }
                     
                     if cart.destinationProtein != "" && cart.destinationProtein != "0" {
-                        BarView(title: "Protein", color: .green, destinationAmount: CGFloat(Double(cart.destinationProtein.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["protein"]!), showUnit: true)
+                        BarView(title: Text("protein"), color: .green, destinationAmount: CGFloat(Double(cart.destinationProtein.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["protein"]!), showUnit: true)
                     }
                     
                     if cart.destinationLeucin != "" && cart.destinationLeucin != "0" {
-                        BarView(title: "L-Leucin", color: .green, destinationAmount: CGFloat(Double(cart.destinationLeucin.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["leucin"]!), showUnit: true)
+                        BarView(title: Text("leucine"), color: .green, destinationAmount: CGFloat(Double(cart.destinationLeucin.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["leucin"]!), showUnit: true)
                     }
                     
                     if cart.destinationSalt != "" && cart.destinationSalt != "0" {
-                        BarView(title: "Salz", color: Color("saltColor"), destinationAmount: CGFloat(Double(cart.destinationSalt.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["salt"]!), showUnit: true)
+                        BarView(title: Text("salt"), color: Color("saltColor"), destinationAmount: CGFloat(Double(cart.destinationSalt.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(currentValues["salt"]!), showUnit: true)
                     }
                 }
                 
@@ -108,7 +108,7 @@ struct DashboardView: View {
         for index in 0..<cart.orders.count {
             if cart.orders[index].date == dateString {
                 
-                // modifier for
+                // modifier
                 let modifier = Double(cart.orders[index].modifier)
                 
                 currentAmountKcal += (Double(cart.orders[index].product.kcal) ?? 0) / 100 * modifier

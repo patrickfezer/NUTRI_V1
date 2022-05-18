@@ -14,7 +14,7 @@ struct ImportListView: View {
         NavigationLink {
             ImportView()
         } label: {
-            LabelIconView(icon: "square.and.arrow.down", iconColor: .white, backgroundColor: .orange, text: "Importieren")
+            LabelIconView(icon: "square.and.arrow.down", iconColor: .white, backgroundColor: .orange, text: Text("import"))
         }
 
         

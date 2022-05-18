@@ -10,16 +10,25 @@ import SwiftUI
 struct productNutritionCollectionView: View {
     
     @EnvironmentObject var cart: Cart
-    @EnvironmentObject var ownProduct: OwnProductConfiguration
+    @EnvironmentObject var ownProduct: CollectedProductOrder
     
     let product: Product
     let modifier: Double
     
     func amountConverter(product: String) -> String {
+        var temp = ""
+        var number: Double = 0
+            
+        if let num = Double(product.replacingOccurrences(of: ",", with: ".")) {
+            number = num
+        }
         
-        // optional value is used to show the fault if there is one in json catalog
-        return String(format: "%.2f", Double(product.replacingOccurrences(of: ",", with: ".").replacingOccurrences(of: " ", with: ""))! / 100 * modifier)
+        temp = String(format: "%.2f", number / 100 * modifier)
+
+        
+        return temp
     }
+    
     
     var body: some View {
         Section(header: Text("Nährwerte für \(String(format: "%.1f", modifier))g")) {

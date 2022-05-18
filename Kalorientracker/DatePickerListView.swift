@@ -16,6 +16,7 @@ struct DatePickerListView: View {
         
         // in NavigationLink, showView is not needed
         NavigationLink("Datum auswählen", destination: DatePickerForListView(date: $date))
+        
     }
 }
 

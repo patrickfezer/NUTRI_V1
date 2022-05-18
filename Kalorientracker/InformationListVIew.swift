@@ -9,7 +9,14 @@ import SwiftUI
 
 struct InformationListView: View {
     var body: some View {
-        NavigationLink("Informationen", destination: InformationView())
+        
+        NavigationLink {
+            InformationView()
+        } label: {
+            LabelIconView(icon: "info.circle", iconColor: .white, backgroundColor: .green, text: Text("information"))
+        }
+
+//        NavigationLink("Informationen", destination: InformationView())
     }
 }
 

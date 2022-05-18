@@ -7,28 +7,38 @@
 
 import SwiftUI
 
+
 struct ProductButton: View {
     @Binding var showView: Bool
     let symbol: String
     let color: Color
     
     var body: some View {
+        
         VStack {
             Spacer()
             HStack {
                 Spacer()
+
+                
                 Button(action: {
                     self.showView = true
                 }, label: {
-                    Image(systemName: symbol).resizable().frame(width: 25, height: 25, alignment: .center)
+                    Image(systemName: symbol)
+                        .resizable()
+                        .frame(width: 25, height: 25, alignment: .center)
+                        .padding(15)
+                        .foregroundColor(.white)
+                        .background(color)
+                        .clipShape(Circle())
+                        
+                    
                 })
-                .padding(15)
-                .foregroundColor(.white)
-                .background(color)
-                .clipShape(Circle())
-                .padding(.trailing, 20)
-                .padding(.bottom, 20)
+                    .padding(.trailing, 20)
+                    .padding(.bottom, 20)
+                    .buttonStyle(ScaleButtonStyle())
             }
+            
         }
     }
 }

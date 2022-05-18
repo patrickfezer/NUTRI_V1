@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @State private var input = "0"
-    @State private var show = false
     @EnvironmentObject var cart: Cart
     @EnvironmentObject var appData: AppData
+    @State private var showAlert = false
 
     let url = "https://testflight.apple.com/join/SBQywh44"
     
@@ -21,19 +20,20 @@ struct SettingsView: View {
         
         NavigationView {
             List {
-                Section(header: Text("Dashboard")) {
-                    DestinationAmountListView().environmentObject(cart)
+                Section(header: Text("dashboard")) {
+                    DestinationAmountListView()
+                        .environmentObject(cart)
                 }
 
-                Section(header: Text("Support & Feedback")) {
+                Section(header: Text("contact")) {
                     ContactListView()
                 }
 
-                Section(header: Text("Informationen")) {
+                Section(header: Text("information")) {
                     InformationListView() 
                 }
                 
-                Section(header: Text("Speichermanagement")) {
+                Section(header: Text("storageManagement")) {
                     ResetListView()
                 }
                 
@@ -47,7 +47,7 @@ struct SettingsView: View {
                         
                         HStack {
                             
-                            LabelIconView(icon: "ant.fill", iconColor: .white, backgroundColor: .blue, text: "Teilnahme am TestFlight Betaprogramm")
+                            LabelIconView(icon: "ant.fill", iconColor: .white, backgroundColor: .blue, text: Text("TestFlightParticipation"))
                         }
                         
                     }
@@ -61,8 +61,7 @@ struct SettingsView: View {
                 
                 if AppData.devMode {
                     Section(header: Text("Dev Settings")) {
-//                        TestListView()
-                        Button("DEV BUTTON") {
+                        Button("dev") {
                             appData.appsFirstStart = false
                         }
                     }
@@ -71,13 +70,15 @@ struct SettingsView: View {
                 
             }
             .listStyle(GroupedListStyle())
-            .navigationTitle(Text("Einstellungen"))
+            .navigationTitle(Text("settings"))
         }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingsView().environmentObject(Cart())
+        SettingsView()
+            .environmentObject(Cart())
+            .environment(\.colorScheme, .dark)
     }
 }

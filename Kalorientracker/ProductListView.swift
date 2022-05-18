@@ -9,8 +9,7 @@ import SwiftUI
 
 struct ProductListView: View {
     
-    // var for the diffrent products
-    var product: Product
+    let product: Product
     
     
     var body: some View {
@@ -27,21 +26,21 @@ struct ProductListView: View {
                         HStack {
                             
                             // check for protein
-                            if Double(product.protein)! >= 12 {
+                            if Double(product.protein) ?? 0 >= 12 {
                                 LabelView(text: "Viel Protein", backgroundColor: .green)
                             } else {
                                 LabelView(text: "Wenig Protein", backgroundColor: .blue)
                             }
                             
                             // check for fat
-                            if Double(product.fat)! >= 10 {
+                            if Double(product.fat) ?? 0 >= 10 {
                                 LabelView(text: "Viel Fett", backgroundColor: .red)
                             } else {
                                 LabelView(text: "Wenig Fett", backgroundColor: .orange)
                             }
                             
                             // check for carbs
-                            if Double(product.carbs)! >= 30 {
+                            if Double(product.carbs) ?? 0 >= 30 {
                                 LabelView(text: "Viel Kohlenhydrate", backgroundColor: .yellow)
                             } else {
                                 LabelView(text: "Wenig Kohlenhydrate", backgroundColor: .purple)

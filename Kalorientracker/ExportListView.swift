@@ -14,7 +14,7 @@ struct ExportListView: View {
         NavigationLink {
             ExportView()
         } label: {
-            LabelIconView(icon: "square.and.arrow.up", iconColor: .white, backgroundColor: .green, text: "Exportieren")
+            LabelIconView(icon: "square.and.arrow.up", iconColor: .white, backgroundColor: .green, text: Text("export"))
         }
         
 //        NavigationLink(destination: ExportView()) {

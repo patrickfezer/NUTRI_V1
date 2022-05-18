@@ -35,6 +35,7 @@ struct LogbookView: View {
         return temp
     }
     
+    
     var body: some View {
         
         // convertes the date from the DateView to a string
@@ -43,6 +44,19 @@ struct LogbookView: View {
         let dateString = formatter.string(from: cart.date)
         
         var copyLoogbook = [Order]()
+        
+        func deleteLogbookEntries() {
+            DispatchQueue.main.async {
+                self.cart.orders.forEach { order in
+                    if order.date == dateString {
+                        ordersToDelete.append(order)
+                    }
+                }
+            }
+
+            // Disable edit mode
+            editMode = .inactive
+        }
         
         // check if one section is empty
         func showMeal(_ meal: String) -> Bool {
@@ -69,15 +83,16 @@ struct LogbookView: View {
                         
                         Button("Logbuch kopieren") {
                             
-                            
-                            for index in 0..<cart.orders.count {
+                            DispatchQueue.main.async {
                                 
-                                if cart.orders[index].date == dateString {
-                                    copyLoogbook.append(cart.orders[index])
+                                cart.orders.forEach { order in
+                                    if order.date == dateString {
+                                        copyLoogbook.append(order)
+                                    }
                                 }
+                                
+                                self.showLogbookCopySheet = true
                             }
-                            
-                            self.showLogbookCopySheet = true
                             
                         }
                         .sheet(isPresented: $showLogbookCopySheet, content: {
@@ -105,47 +120,66 @@ struct LogbookView: View {
                         stored = index
                     }
                     
-                    print("Einträge: \(stored)")
+                    print("Einträge im Logbuch: \(stored)")
             })
                 
-                if editMode.isEditing {
-                    ProductButton(showView: $deleteAllEntries, symbol: "trash", color: Color.red)
-                        .actionSheet(isPresented: $deleteAllEntries, content: {
-                            ActionSheet(title: Text("Alle Einträge löschen"), message: Text("Alle Einträge im Logbuch für das ausgewählte Datum werden unwiederruflich gelöscht."), buttons:
-                                            [
-                                                .destructive(Text("Löschen"), action: {
-                                                    
-                                                    // Thread-Priorisierung
-                                                    DispatchQueue.main.async {
-
-                                                        
-                                                        self.cart.orders.forEach { order in
-                                                            if order.date == dateString {
-                                                                self.cart.remove(order: order)
-                                                            }
-                                                        }
-                                                    }
-                                                    // Disable edit mode
-                                                    editMode = .inactive
-                                                    
-                                                }),
-                                                
-                                                // Button to cancel
-                                                .cancel()
-                                            ])
-                        })
-                        .animation(.default)
+                // App ist auf manchen Geräten abgestürzt wenn der Code direkt beim Button ausgeführt wurde
+                // MARK: Alle Einträge im Logbuch löschen
+                .onChange(of: deleteAllEntries) { newValue in
+                    DispatchQueue.main.async {
+                        ordersToDelete.forEach { order in
+                            self.cart.remove(order: order)
+                        }
+                    }
+                    self.cart.sortArray()
                 }
+                
+                if #available(iOS 15, *) {
+                    if editMode.isEditing {
+                        
+                        ProductButton(showView: $deleteAllEntries, symbol: "trash", color: .red)
+                        
+                            .confirmationDialog("Alle Logbucheinträge werden gelöscht.", isPresented: $deleteAllEntries, titleVisibility: .visible) {
+                                
+                                Button(role: .destructive) {
+                                    deleteLogbookEntries()
+                                } label: {
+                                    Text("delete")
+                                }
+                                
+                                Button(role: .cancel) {
+                                    deleteAllEntries = false
+                                } label: {
+                                    Text("cancel")
+                                }
+
+                            }
+                    }
+                    
+                } else {
+                    if editMode.isEditing {
+                        ProductButton(showView: $deleteAllEntries, symbol: "trash", color: .red)
+                            .actionSheet(isPresented: $deleteAllEntries, content: {
+                                ActionSheet(title: Text("Alle Einträge löschen"), message: Text("Alle Einträge im Logbuch für das ausgewählte Datum werden unwiederruflich gelöscht."), buttons:
+                                                [.destructive(Text("Löschen"), action: {
+                                    deleteLogbookEntries()}),
+                                                 // Button to cancel
+                                                 .cancel()])
+                            })
+                    }
+                }
+                
+                
+                
             }
-        }
-        
-        // MARK: Testing to sort the array
-        .onAppear {
-            // Sort the array
-            self.cart.orders.sort {
-                $0.date < $1.date
-            }
-            
+            .animation(.default, value: true)
+            .actionSheet(isPresented: $deleteAllEntries, content: {
+                ActionSheet(title: Text("Alle Einträge löschen"), message: Text("Alle Einträge im Logbuch für das ausgewählte Datum werden unwiederruflich gelöscht."), buttons:
+                                [.destructive(Text("Löschen"), action: {
+                    deleteLogbookEntries()}),
+                                 // Button to cancel
+                                 .cancel()])
+            })
         }
     }
     
@@ -155,5 +189,6 @@ struct LogbookView_Previews: PreviewProvider {
     static var previews: some View {
         LogbookView().environmentObject(Cart())
         .environment(\.locale, .init(identifier: "de"))
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }

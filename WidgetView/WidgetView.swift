@@ -8,45 +8,33 @@
 import WidgetKit
 import SwiftUI
 
-// MARK: Preview with constant Values
-let BarViewWithConstantValues = BarViewEntry(date: Date(), BarKcal: BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount:                                                      2800, currentAmount: 2350, showUnit: false),
-                                             BarFat: BarForWidgetView(title: "Fett", color: .red, destinationAmount: 60, currentAmount: 45, showUnit: true),
-                                             BarSaturated: BarForWidgetView(title: "Ges. Fetts.", color: .red, destinationAmount: 25, currentAmount: 12.5, showUnit: true),
-                                             BarCarbs: BarForWidgetView(title: "Carbs", color: .orange, destinationAmount: 400, currentAmount: 250, showUnit: true),
-                                             BarRoughage: BarForWidgetView(title: "Ballastst.", color: .orange, destinationAmount: 50, currentAmount: 20.5, showUnit: true),
-                                             BarSugar: BarForWidgetView(title: "Zucker", color: .orange, destinationAmount: 60, currentAmount: 45, showUnit: true),
-                                             BarProtein: BarForWidgetView(title: "Protein", color: .green, destinationAmount: 180, currentAmount: 125, showUnit: true),
-                                             BarLLeucin: BarForWidgetView(title: "L-Leucin", color: .green, destinationAmount: 15, currentAmount: 7.5, showUnit: true),
-                                             BarSalt: BarForWidgetView(title: "Salz", color: Color("saltColor"), destinationAmount: 8, currentAmount: 4, showUnit: true))
 
-
-// MARK: BarViewEntry
+// MARK: BarEntry
 struct BarViewEntry: TimelineEntry {
-    
-    var date: Date
-    let BarKcal: BarForWidgetView
-    let BarFat: BarForWidgetView
-    let BarSaturated: BarForWidgetView
-    let BarCarbs: BarForWidgetView
-    let BarRoughage: BarForWidgetView
-    let BarSugar: BarForWidgetView
-    let BarProtein: BarForWidgetView
-    let BarLLeucin: BarForWidgetView
-    let BarSalt: BarForWidgetView
+    let date: Date
+    let kcal: WidgetData
+    let fat: WidgetData
+    let saturated: WidgetData
+    let carbs: WidgetData
+    let protein: WidgetData
+    let leucin: WidgetData
 }
+
+// MARK: BarEntry with constant Values
+// Used in Placeholder and Snapshot Views
+let constantWidgetData = BarViewEntry(date: Date(), kcal: WidgetData(title: "Kcal", destinationAmount: 2800, currentAmount: 2300, color: .blue, showUnit: false), fat: WidgetData(title: "Fett", destinationAmount: 60, currentAmount: 35, color: .red, showUnit: true), saturated: WidgetData(title: "Ges. Fettsäuren", destinationAmount: 10, currentAmount: 6.5, color: .red, showUnit: true), carbs: WidgetData(title: "Carbs", destinationAmount: 400, currentAmount: 355, color: .orange, showUnit: true), protein: WidgetData(title: "Protein", destinationAmount: 200, currentAmount: 135, color: .green, showUnit: true), leucin: WidgetData(title: "L-Leucin", destinationAmount: 25, currentAmount: 7.5, color: .blue, showUnit: true))
 
 
 // MARK: Provider
 struct Provider: TimelineProvider {
     
-//  MARK: Saved Data
-    @AppStorage("destinationAmounts", store: UserDefaults(suiteName: "group.com.fezer.Kalorientracker"))
-    var destinationAmounts: Data = Data()
+    // Saved Data in App Group
+    @AppStorage("destinationAmounts", store: UserDefaults(suiteName: "group.com.fezer.shared")) var destinationAmounts: Data = Data()
     
-    @AppStorage("currentAmounts", store: UserDefaults(suiteName: "group.com.fezer.Kalorientracker"))
-    var currentAmounts: Data = Data()
+    @AppStorage("currentAmounts", store: UserDefaults(suiteName: "group.com.fezer.shared")) var currentAmounts: Data = Data()
 
     
+    // Variables Dictionary ----------------------------------
     var getCurrentAmounts: [String : Double] {
         
         
@@ -55,7 +43,7 @@ struct Provider: TimelineProvider {
             return ["" : 0]
         }
         
-        print("Updatet current amounts")
+        print("Updated current amounts")
         return getterCurrentAmounts
     }
     
@@ -69,33 +57,43 @@ struct Provider: TimelineProvider {
         print("Updatet destination amounts")
         return getterDestinationAmounts
     }
+    // -------------------------------------------------------
+    
+    
+    // Functions to get Values as Valid CGFloat ----------------------------------------
+    func getterDestinationAmount(_ key: String) -> CGFloat {
 
-    // MARK: Placeholer
-    func placeholder(in context: Context) -> BarViewEntry {
-        return BarViewWithConstantValues
+        return CGFloat(Double(getDestinationAmounts[key]!.replacingOccurrences(of: ",", with: ".")) ?? 0)
+
     }
     
-    // MARK: Snapshot
+    func getterCurrentAmount(_ key: String) -> CGFloat {
+        return CGFloat(getCurrentAmounts[key] ?? 0)
+    }
+    // ---------------------------------------------------------------------------------
+
+    
+    // Placeholer -> return const. Values
+    func placeholder(in context: Context) -> BarViewEntry {
+        return constantWidgetData
+    }
+    
+    // Snapshot
     // Showing in the widget Configuration view from iOS
     func getSnapshot(in context: Context, completion: @escaping (BarViewEntry) -> Void) {
         
-        let entry = BarViewWithConstantValues
+        let entry = constantWidgetData
         
         completion(entry)
     }
     
-    // MARK: TimeLine
+    // TimeLine
     func getTimeline(in context: Context, completion: @escaping (Timeline<BarViewEntry>) -> Void) {
         
-        let entry = BarViewEntry(date: Date(), BarKcal: BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount: CGFloat(Double(getDestinationAmounts["kcal"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["kcal"]!), showUnit: false),
-            BarFat: BarForWidgetView(title: "Fett", color: .red, destinationAmount: CGFloat(Double(getDestinationAmounts["fat"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["fat"]!), showUnit: true),
-            BarSaturated: BarForWidgetView(title: "Ges. Fetts.", color: .red, destinationAmount: CGFloat(Double(getDestinationAmounts["saturated"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["saturated"]!), showUnit: true),
-            BarCarbs: BarForWidgetView(title: "Carbs", color: .orange, destinationAmount: CGFloat(Double(getDestinationAmounts["carbs"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["carbs"]!), showUnit: true),
-            BarRoughage: BarForWidgetView(title: "Ballastst.", color: .orange, destinationAmount: CGFloat(Double(getDestinationAmounts["roughage"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["roughage"]!), showUnit: true),
-            BarSugar: BarForWidgetView(title: "Zucker", color: .orange, destinationAmount: CGFloat(Double(getDestinationAmounts["sugar"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["sugar"]!), showUnit: true),
-            BarProtein: BarForWidgetView(title: "Protein", color: .green, destinationAmount: CGFloat(Double(getDestinationAmounts["protein"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["protein"]!), showUnit: true),
-            BarLLeucin: BarForWidgetView(title: "L-Leucin", color: .green, destinationAmount: CGFloat(Double(getDestinationAmounts["leucin"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["leucin"]!), showUnit: true),
-            BarSalt: BarForWidgetView(title: "Salz", color: Color("saltColor"), destinationAmount: CGFloat(Double(getDestinationAmounts["salt"]!.replacingOccurrences(of: ",", with: ".")) ?? 0), currentAmount: CGFloat(getCurrentAmounts["salt"]!), showUnit: true))
+        
+        
+        let entry = BarViewEntry(date: Date(), kcal: WidgetData(title: "Kalorien", destinationAmount: getterDestinationAmount("kcal"), currentAmount: getterCurrentAmount("kcal"), color: .blue, showUnit: false), fat: WidgetData(title: "Fett", destinationAmount: getterDestinationAmount("fat"), currentAmount: getterCurrentAmount("fat"), color: .red, showUnit: true), saturated: WidgetData(title: "Ges. Fetts.", destinationAmount: getterDestinationAmount("saturated"), currentAmount: getterCurrentAmount("saturated"), color: .red, showUnit: true), carbs: WidgetData(title: "Carbs", destinationAmount: getterDestinationAmount("carbs"), currentAmount: getterCurrentAmount("carbs"), color: .orange, showUnit: true), protein: WidgetData(title: "Protein", destinationAmount: getterDestinationAmount("protein"), currentAmount: getterCurrentAmount("protein"), color: .green, showUnit: true), leucin: WidgetData(title: "L-Leucin", destinationAmount: getterDestinationAmount("leucin"), currentAmount: getterCurrentAmount("leucin"), color: .green, showUnit: true))
+        
         
         
         let timeLine = Timeline(entries: [entry], policy: .atEnd)
@@ -106,11 +104,7 @@ struct Provider: TimelineProvider {
 // MARK: PlaceHolderView
 struct PlaceHolderView: View {
     var body: some View {
-        VStack {
-            BarForWidgetView(title: "Kalorien", color: .blue, destinationAmount: 2800, currentAmount: 2400, showUnit: false)
-            BarForWidgetView(title: "Carbs", color: .orange, destinationAmount: 400, currentAmount: 125, showUnit: true)
-            BarForWidgetView(title: "Fett", color: .red, destinationAmount: 60, currentAmount: 55, showUnit: true)
-        }
+        Text("Keine Daten gefunden.")
     }
 }
 
@@ -118,6 +112,7 @@ struct PlaceHolderView: View {
 struct WidgetEntryView: View {
     
     let entry: Provider.Entry
+    
 
     @Environment (\.widgetFamily) private var widgetFamily
     
@@ -126,27 +121,38 @@ struct WidgetEntryView: View {
         
         if widgetFamily == .systemMedium  {
             VStack {
-                BarForWidgetView(title: entry.BarKcal.title, color: entry.BarKcal.color, destinationAmount: entry.BarKcal.destinationAmount, currentAmount: entry.BarKcal.currentAmount, showUnit: entry.BarKcal.showUnit)
-                BarForWidgetView(title: entry.BarProtein.title, color: entry.BarProtein.color, destinationAmount: entry.BarProtein.destinationAmount, currentAmount: entry.BarProtein.currentAmount, showUnit: entry.BarProtein.showUnit)
-                BarForWidgetView(title: entry.BarCarbs.title, color: entry.BarCarbs.color, destinationAmount: entry.BarCarbs.destinationAmount, currentAmount: entry.BarCarbs.currentAmount, showUnit: entry.BarCarbs.showUnit)
+                BarForWidgetView(title: entry.kcal.title, color: entry.kcal.color, destinationAmount: entry.kcal.destinationAmount, currentAmount: entry.kcal.currentAmount, showUnit: entry.kcal.showUnit)
+                BarForWidgetView(title: entry.protein.title, color: entry.protein.color, destinationAmount: entry.protein.destinationAmount, currentAmount: entry.protein.currentAmount, showUnit: entry.protein.showUnit)
+                BarForWidgetView(title: entry.carbs.title, color: entry.carbs.color, destinationAmount: entry.carbs.destinationAmount, currentAmount: entry.carbs.currentAmount, showUnit: entry.carbs.showUnit)
             }
             .padding()
+            .padding(.top, 25)
+            .padding(.bottom, 25)
             .background(Color("WidgetBackground"))
             
         } else if widgetFamily == .systemLarge {
             VStack {
-                BarForWidgetView(title: entry.BarKcal.title, color: entry.BarKcal.color, destinationAmount: entry.BarKcal.destinationAmount, currentAmount: entry.BarKcal.currentAmount, showUnit: entry.BarKcal.showUnit)
-                BarForWidgetView(title: entry.BarFat.title, color: entry.BarFat.color, destinationAmount: entry.BarFat.destinationAmount, currentAmount: entry.BarFat.currentAmount, showUnit: entry.BarFat.showUnit)
-                BarForWidgetView(title: entry.BarSaturated.title, color: entry.BarSaturated.color, destinationAmount: entry.BarSaturated.destinationAmount, currentAmount: entry.BarSaturated.currentAmount, showUnit: entry.BarSaturated.showUnit)
-                BarForWidgetView(title: entry.BarCarbs.title, color: entry.BarCarbs.color, destinationAmount: entry.BarCarbs.destinationAmount, currentAmount: entry.BarCarbs.currentAmount, showUnit: entry.BarCarbs.showUnit)
-                BarForWidgetView(title: entry.BarProtein.title, color: entry.BarProtein.color, destinationAmount: entry.BarProtein.destinationAmount, currentAmount: entry.BarProtein.currentAmount, showUnit: entry.BarProtein.showUnit)
-                BarForWidgetView(title: entry.BarLLeucin.title, color: entry.BarLLeucin.color, destinationAmount: entry.BarLLeucin.destinationAmount, currentAmount: entry.BarLLeucin.currentAmount, showUnit: entry.BarLLeucin.showUnit)
+                BarForWidgetView(title: entry.kcal.title, color: entry.kcal.color, destinationAmount: entry.kcal.destinationAmount, currentAmount: entry.kcal.currentAmount, showUnit: entry.kcal.showUnit)
+                BarForWidgetView(title: entry.fat.title, color: entry.fat.color, destinationAmount: entry.fat.destinationAmount, currentAmount: entry.fat.currentAmount, showUnit: entry.fat.showUnit)
+                BarForWidgetView(title: entry.saturated.title, color: entry.saturated.color, destinationAmount: entry.saturated.destinationAmount, currentAmount: entry.saturated.currentAmount, showUnit: entry.saturated.showUnit)
+                BarForWidgetView(title: entry.carbs.title, color: entry.carbs.color, destinationAmount: entry.carbs.destinationAmount, currentAmount: entry.carbs.currentAmount, showUnit: entry.carbs.showUnit)
+                BarForWidgetView(title: entry.protein.title, color: entry.protein.color, destinationAmount: entry.protein.destinationAmount, currentAmount: entry.protein.currentAmount, showUnit: entry.protein.showUnit)
+                BarForWidgetView(title: entry.leucin.title, color: entry.leucin.color, destinationAmount: entry.leucin.destinationAmount, currentAmount: entry.leucin.currentAmount, showUnit: entry.leucin.showUnit)
             }
             .padding()
-            .padding(.top, 2)
-            .padding(.bottom, 2)
+            .padding(.top, 35)
+            .padding(.bottom, 35.0)
             .background(Color("WidgetBackground"))
-            }
+        } else if widgetFamily == .systemSmall {
+            
+            let progress = CGFloat(entry.kcal.currentAmount / entry.kcal.destinationAmount)
+            
+            CircleView(progressLength: progress)
+                .padding(25)
+                .padding(.top, 25)
+                .padding(.bottom, 25)
+                .background(Color("WidgetBackground"))
+        }
     }
 }
 
@@ -161,7 +167,7 @@ struct WidgetView: Widget {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             WidgetEntryView(entry: entry)
         }
-        .supportedFamilies([.systemMedium, .systemLarge])
+        .supportedFamilies([.systemSmall, .systemMedium, .systemLarge])
         .configurationDisplayName("Fortschritte")
         .description("Behalte deinen aktuellen Fortschritt ganz einfach im Auge.")
     }
@@ -169,17 +175,25 @@ struct WidgetView: Widget {
 
 
 // MARK: Previews
-struct WidgetViewMedium_Previews: PreviewProvider {
+struct WidgetViewSmall_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetEntryView(entry: BarViewWithConstantValues)
-            .previewContext(WidgetPreviewContext(family: .systemMedium))
+        WidgetEntryView(entry: constantWidgetData)
+            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .environment(\.colorScheme, .dark)
     }
 }
 
+struct WidgetViewMedium_Previews: PreviewProvider {
+    static var previews: some View {
+        WidgetEntryView(entry: constantWidgetData)
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
+            .environment(\.colorScheme, .dark)
+    }
+}
 
 struct WidgetViewLarge_Previews: PreviewProvider {
     static var previews: some View {
-        WidgetEntryView(entry: BarViewWithConstantValues)
+        WidgetEntryView(entry: constantWidgetData)
             .previewContext(WidgetPreviewContext(family: .systemLarge))
             .environment(\.colorScheme, .dark)
     }

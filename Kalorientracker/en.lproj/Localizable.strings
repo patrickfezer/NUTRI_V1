@@ -1,0 +1,84 @@
+/* 
+  Localizable.strings
+  Kalorientracker
+
+  Created by Patrick Fezer on 13.10.21.
+  
+*/
+
+// MARK: AppTabView
+"dashboard" = "Dashboard";
+"logbook" = "Logbook";
+"foods" = "Foods";
+"settings" = "Settings";
+
+// MARK: Settings
+
+// List View Entries
+"destinationValues" = "Destination Values";
+"contact" = "Contact";
+"information" = "Information";
+"storageManagement" = "Storage management";
+"import" = "Import";
+"export" = "Export";
+"TestFlightParticipation" = "Participate in the TestFlight beta program";
+"settings" = "Settings";
+
+
+// Destination Values
+"destinationText" = "Type in your dextination values. If you don't put in a value or 0, the Diagram in the Dashboard won't be show.";
+"calories" = "Calories";
+"far" = "Fat";
+"saturated" = "Saturated";
+"carbs" = "Carbs";
+"roughage" = "Roughage";
+"sugar" = "Sugar";
+"protein" = "Protein";
+"leucine" = "L-Leucine";
+"salt" = "Salt";
+"reset" = "Reset";
+"resetWarningText" = "All values will be removed.";
+"delete" = "Delete";
+"destinationSelection" = "Training";
+"destinationTitle" = "Destionation values";
+
+// Mail
+"mailNotFoundWarningDescription" = "You need the original Apple Mail App to use this function.";
+"mailNotFoundWarningTitle" = "Apple Mail not found.";
+"feedback" = "Feedback";
+"support" = "Support";
+
+// App Information
+"appInfo" = "App information";
+"info" = "Information";
+"version" = "Version";
+"privacy" = "privacy";
+"privacyProtection" = "Privacy protection";
+"webSite" = "Website";
+
+// storage management
+"food" = "Food";
+"logbookEntries" = "Logbook entries";
+"keep" = "keep";
+"removeEntriesWarning" = "";
+"autoDelete" = "Auto delete";
+"delete" = "Delete";
+
+// Debugging
+"dev" = "Developer-Mode";
+
+
+// MARK: Dashboard
+"cal" = "Calories";
+"fat" = "Fat";
+"saturated" = "Saturated";
+"carbs" = "Carbs";
+"roughage" = "Roughage";
+"sugar" = "Sugar";
+"protein" = "Protein";
+"leucine" = "L-Leucine";
+"salt" = "Salt";
+
+// defaults
+"done" = "Done";
+"finish" = "Finish";

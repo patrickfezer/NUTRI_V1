@@ -22,7 +22,6 @@ struct Doc: FileDocument {
         guard let data = configuration.file.regularFileContents, let encoded = String(data: data, encoding: .utf8) else {
             throw CocoaError(.fileReadCorruptFile)
         }
-        
         content = encoded
     }
     

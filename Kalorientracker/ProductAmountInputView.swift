@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProductAmountInputView: View {
+    
+    @State private var product = Product.emtptyProduct
     @Binding var productName: String
     @Binding var manufacturer: String
     @Binding var kcal: String
@@ -47,7 +49,7 @@ struct ProductAmountInputView: View {
                     ProductConfigurationAmountInputView(nutritionName: "Salz", amountInput: $salt)
 
                     Picker("Kategorie", selection: $chosedCategory) {
-                        ForEach(0 ..< ProductAmountInputView.category.count) {
+                        ForEach(0 ..< ProductAmountInputView.category.count, id: \.self) {
                             Text(ProductAmountInputView.category[$0])
                         }
                     }
