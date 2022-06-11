@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct ProductsView: View {
-
-    @StateObject private var searchBar = SearchBar()
     @EnvironmentObject var ownProduct: CollectedProductOrder
+    @Environment(\.isSearching) private var isSearching
     @State private var showConfigurationView = false
     @State private var editMode = EditMode.inactive
+    @State private var searchText = ""
     let saveKey = "ownProducts"
     
     func checkForFilterKey(filterKey: String) -> Bool {
@@ -30,31 +30,31 @@ struct ProductsView: View {
 
         return NavigationView {
             ZStack {
-                
-                List() {
-                    // show products with categories if searchtext is empty
-                    if !searchBar.searchController.isActive || searchBar.text == "" {
-                        ForEach(ProductAmountInputView.category, id: \.self) { category in
-                            ProductFilteredListView(showProduct: checkForFilterKey(filterKey: category), filter: category, editButtonState: editMode, ownProduct: ownProduct)
-                        }
-                    
-                    } else if searchBar.searchController.isActive && searchBar.text != "" {
-                        
-                        ForEach(ownProduct.products.sorted(by: {
-                            $0.product.productName < $1.product.productName
-                        }).filter({
-                            searchBar.text.isEmpty || $0.product.productName.localizedStandardContains(searchBar.text)
-                        })) { ownProduct in
-                            ProductListView(product: ownProduct.product)
+                    List() {
+                        // show products with categories if searchtext is empty
+                        if searchText.isEmpty {
+                            ForEach(ProductAmountInputView.category, id: \.self) { category in
+                                ProductFilteredListView(showProduct: checkForFilterKey(filterKey: category), filter: category, editButtonState: editMode, ownProduct: ownProduct)
+                            }
+                            
+                        } else if !searchText.isEmpty {
+                            
+                            ForEach(ownProduct.products.sorted(by: {
+                                $0.product.productName < $1.product.productName
+                            }).filter({
+                                searchText.isEmpty || $0.product.productName.localizedCaseInsensitiveContains(searchText)
+                            })) { ownProduct in
+                                ProductListView(product: ownProduct.product)
+                            }
                         }
                     }
-                }
-                .add(searchBar)
-                .listStyle(GroupedListStyle())
-                .navigationBarTitle("Lebensmittel", displayMode: .automatic)
-                .navigationBarItems(trailing: EditButton().disabled(ownProduct.products.isEmpty))
-                .environment(\.editMode, $editMode)
-                if !searchBar.searchController.isActive && !editMode.isEditing {
+                    .searchable(text: $searchText)
+                    .listStyle(GroupedListStyle())
+                    .navigationBarTitle("Lebensmittel", displayMode: .automatic)
+                    .navigationBarItems(trailing: EditButton().disabled(ownProduct.products.isEmpty))
+                    .environment(\.editMode, $editMode)
+               
+                if !editMode.isEditing {
                     ProductButton(showView: $showConfigurationView, symbol: "plus", color: Color.blue).sheet(isPresented: $showConfigurationView, content: {
                         ProductConfigurationView(showSheet: $showConfigurationView)
                             .environmentObject(ownProduct)
@@ -62,8 +62,8 @@ struct ProductsView: View {
                 }
             }
             
-            // Turn of edit mode when searchbar is avtive
-            .onChange(of: searchBar.searchController.isActive) { searchBar in
+//             Turn of edit mode when searchbar is avtive
+            .onChange(of: searchText.isEmpty) { searchBar in
                 if searchBar {
                     editMode = .inactive
 

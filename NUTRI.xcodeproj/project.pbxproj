@@ -39,7 +39,7 @@
 		5A49F0DB2509588F00476CD7 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49F0C32509587000476CD7 /* WidgetKit.framework */; platformFilter = ios; };
 		5A49F0DC2509588F00476CD7 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A49F0C52509587000476CD7 /* SwiftUI.framework */; };
 		5A49F0DF2509588F00476CD7 /* WidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A49F0DE2509588F00476CD7 /* WidgetView.swift */; };
-		5A49F0E82509588F00476CD7 /* WidgetViewExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 5A49F0DA2509588F00476CD7 /* WidgetViewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		5A49F0E82509588F00476CD7 /* WidgetViewExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 5A49F0DA2509588F00476CD7 /* WidgetViewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5A51015F25060E640043908E /* EachMealTotalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A51015E25060E640043908E /* EachMealTotalView.swift */; };
 		5A510161250615270043908E /* EachMealTotalListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A510160250615270043908E /* EachMealTotalListView.swift */; };
 		5A510165250647190043908E /* EachMealTotalAmountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A510164250647190043908E /* EachMealTotalAmountView.swift */; };
@@ -62,8 +62,6 @@
 		5A6F8E0C2716CAC800B8A3A6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A6F8E0F2716CAC800B8A3A6 /* Localizable.strings */; };
 		5A6F8E0D2716CAC800B8A3A6 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5A6F8E0F2716CAC800B8A3A6 /* Localizable.strings */; };
 		5A749BEB2508C7A500E3EE82 /* ContactListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A749BEA2508C7A500E3EE82 /* ContactListView.swift */; };
-		5A818939250D102000220253 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A818938250D102000220253 /* SearchBar.swift */; };
-		5A81893B250D105800220253 /* ViewControllerResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A81893A250D105800220253 /* ViewControllerResolver.swift */; };
 		5A820E5C250A8780003C7E81 /* PrintHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A47423B24FEE2EC000E5222 /* PrintHelper.swift */; };
 		5A8E26CE251208B200E6F472 /* ProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8E26CD251208B200E6F472 /* ProductsView.swift */; };
 		5A8E26D82512110D00E6F472 /* ProductConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A8E26D72512110D00E6F472 /* ProductConfigurationView.swift */; };
@@ -105,15 +103,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		5A49F0BA250957ED00476CD7 /* Embed App Extensions */ = {
+		5A49F0BA250957ED00476CD7 /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				5A49F0E82509588F00476CD7 /* WidgetViewExtension.appex in Embed App Extensions */,
+				5A49F0E82509588F00476CD7 /* WidgetViewExtension.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -177,8 +175,6 @@
 		5A6F8E102716CAD800B8A3A6 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5A70D603250ABD9A00BEF6EE /* BarForWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarForWidgetView.swift; sourceTree = "<group>"; };
 		5A749BEA2508C7A500E3EE82 /* ContactListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListView.swift; sourceTree = "<group>"; };
-		5A818938250D102000220253 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		5A81893A250D105800220253 /* ViewControllerResolver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerResolver.swift; sourceTree = "<group>"; };
 		5A8E26CD251208B200E6F472 /* ProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductsView.swift; sourceTree = "<group>"; };
 		5A8E26D72512110D00E6F472 /* ProductConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConfigurationView.swift; sourceTree = "<group>"; };
 		5A8E26DC2512123F00E6F472 /* ProductConfigurationAmountInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductConfigurationAmountInputView.swift; sourceTree = "<group>"; };
@@ -522,15 +518,6 @@
 			name = "Design ListViewEntry";
 			sourceTree = "<group>";
 		};
-		5A818937250CE3A000220253 /* Search Bar */ = {
-			isa = PBXGroup;
-			children = (
-				5A818938250D102000220253 /* SearchBar.swift */,
-				5A81893A250D105800220253 /* ViewControllerResolver.swift */,
-			);
-			name = "Search Bar";
-			sourceTree = "<group>";
-		};
 		5A820E5E250A9CA9003C7E81 /* CircleView */ = {
 			isa = PBXGroup;
 			children = (
@@ -629,7 +616,6 @@
 				5A1F4D2124FD3A89000BBA35 /* AppTabView */,
 				5A05544F25247F50008C9D52 /* Main Files */,
 				5A05545225247FB8008C9D52 /* Setup Screen */,
-				5A818937250CE3A000220253 /* Search Bar */,
 				5A290139250811B1003E48F6 /* MailSheetView */,
 				5A510166250650220043908E /* DateSelectionView */,
 				5A8E26C62512088500E6F472 /* ProductView */,
@@ -765,7 +751,7 @@
 				5AA4326F24F7F5040088424F /* Sources */,
 				5AA4327024F7F5040088424F /* Frameworks */,
 				5AA4327124F7F5040088424F /* Resources */,
-				5A49F0BA250957ED00476CD7 /* Embed App Extensions */,
+				5A49F0BA250957ED00476CD7 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -784,7 +770,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1200;
+				LastUpgradeCheck = 1400;
 				TargetAttributes = {
 					5A49F0D92509588F00476CD7 = {
 						CreatedOnToolsVersion = 12.0;
@@ -869,7 +855,6 @@
 				5A06795A24F82FC100AA45B8 /* AppTabView.swift in Sources */,
 				5A06795E24F8303C00AA45B8 /* Cart.swift in Sources */,
 				5A51016A250650570043908E /* DatePickerView.swift in Sources */,
-				5A81893B250D105800220253 /* ViewControllerResolver.swift in Sources */,
 				5AA4329D24F8031E0088424F /* ProductDetailView.swift in Sources */,
 				5A21005D26EFB08A00AB6204 /* TestView.swift in Sources */,
 				5A5AEE7E26F0CF780022706A /* WebView.swift in Sources */,
@@ -920,7 +905,6 @@
 				5AB575C627287F4C00676A1D /* BarForWidgetView.swift in Sources */,
 				5A45767626F7599900BE6CAF /* LabelIconView.swift in Sources */,
 				5A515BB124F9120900558DB3 /* AmountView.swift in Sources */,
-				5A818939250D102000220253 /* SearchBar.swift in Sources */,
 				5A06796024F832F500AA45B8 /* SettingsView.swift in Sources */,
 				5A3804CA25017C0500D9FAF4 /* Shapes.swift in Sources */,
 				5A21005326EF557D00AB6204 /* ExportView.swift in Sources */,
@@ -1066,7 +1050,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1122,7 +1106,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1146,7 +1130,7 @@
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Kalorientracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1175,7 +1159,7 @@
 				DEVELOPMENT_TEAM = 43J5JGL5JP;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Kalorientracker/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -26,7 +26,7 @@ struct LogbookProductListView: View {
             }
             .id(UUID())
             .frame(width: nil, height: 30, alignment: .center)
-            .animation(.default)
+            .animation(.default, value: 1.0)
         }
     }
 }
