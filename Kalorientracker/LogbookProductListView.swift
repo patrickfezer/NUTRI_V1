@@ -13,7 +13,6 @@ struct LogbookProductListView: View {
     var modifier: Double
     var id: UUID
 
-    
     var body: some View {
         
         // taking the modifier using id of product
