@@ -28,6 +28,4 @@ struct Doc: FileDocument {
     func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
         return FileWrapper(regularFileWithContents: content.data(using: .utf8)!)
     }
-    
-    
 }

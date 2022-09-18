@@ -13,8 +13,6 @@ struct ProductEditView: View {
     @State private var product = Product.emtptyProduct
     @State private var categoryIndex = ProductAmountInputView.category.firstIndex(of: "Sonstiges")!
     @State private var blockRefresh = false
-
-
     let id: UUID
 
     var body: some View {

@@ -15,8 +15,6 @@ struct InformationListView: View {
         } label: {
             LabelIconView(icon: "info.circle", iconColor: .white, backgroundColor: .green, text: Text("information"))
         }
-
-//        NavigationLink("Informationen", destination: InformationView())
     }
 }
 

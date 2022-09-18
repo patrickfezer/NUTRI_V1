@@ -29,7 +29,6 @@ struct DestinationAmountInputView: View {
 
             productName
 
-            
             TextField.init(inputName, text: $textValue, onEditingChanged: { edeting in
                 self.isEdeting = true
             }, onCommit: {
