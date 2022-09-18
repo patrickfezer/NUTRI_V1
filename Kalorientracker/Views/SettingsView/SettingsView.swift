@@ -15,7 +15,6 @@ struct SettingsView: View {
 
     let url = "https://testflight.apple.com/join/SBQywh44"
     
-    
     var body: some View {
         
         NavigationView {
