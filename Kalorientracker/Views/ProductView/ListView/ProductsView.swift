@@ -12,7 +12,7 @@ struct ProductsView: View {
     @Environment(\.isSearching) private var isSearching
     @State private var showConfigurationView = false
     @State private var editMode = EditMode.inactive
-    @State private var searchText = ""
+    var searchText: String
     let saveKey = "ownProducts"
     
     func checkForFilterKey(filterKey: String) -> Bool {
@@ -48,13 +48,12 @@ struct ProductsView: View {
                             }
                         }
                     }
-                    .searchable(text: $searchText)
                     .listStyle(GroupedListStyle())
                     .navigationBarTitle("Lebensmittel", displayMode: .automatic)
                     .navigationBarItems(trailing: EditButton().disabled(ownProduct.products.isEmpty))
                     .environment(\.editMode, $editMode)
                
-                if !editMode.isEditing {
+                if !editMode.isEditing && !isSearching {
                     ProductButton(showView: $showConfigurationView, symbol: "plus", color: Color.blue).sheet(isPresented: $showConfigurationView, content: {
                         ProductConfigurationView(showSheet: $showConfigurationView)
                             .environmentObject(ownProduct)
@@ -75,6 +74,7 @@ struct ProductsView: View {
 
 struct OwnProductsView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductsView().environmentObject(CollectedProductOrder())
+        ProductsView(searchText: "")
+            .environmentObject(CollectedProductOrder())
     }
 }

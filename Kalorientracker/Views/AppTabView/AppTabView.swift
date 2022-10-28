@@ -11,6 +11,7 @@ import WidgetKit
 struct AppTabView: View {
     
     @State private var currentTab = 0
+    @State private var searchText = ""
     @EnvironmentObject var cart: Cart
     @AppStorage(ResetView.saveKeyAutoDelete) private var autoDeleteOldEntries = false
     
@@ -30,7 +31,8 @@ struct AppTabView: View {
                 }.tag(1)
 
 
-            ProductsView()
+            ProductsView(searchText: searchText)
+                .searchable(text: $searchText)
                 .tabItem {
                     Image(systemName: "list.bullet.rectangle")
                     Text("foods")
