@@ -11,7 +11,8 @@ struct ProductsView: View {
     @EnvironmentObject var ownProduct: CollectedProductOrder
     @Environment(\.isSearching) private var isSearching
     @State private var showConfigurationView = false
-    @State private var editMode = EditMode.inactive
+//    @Environment(\.editMode) private var editMode
+    @State private var editMode: EditMode = .inactive
     var searchText: String
     let saveKey = "ownProducts"
     
@@ -34,7 +35,8 @@ struct ProductsView: View {
                         // show products with categories if searchtext is empty
                         if searchText.isEmpty {
                             ForEach(ProductAmountInputView.category, id: \.self) { category in
-                                ProductFilteredListView(showProduct: checkForFilterKey(filterKey: category), filter: category, editButtonState: editMode, ownProduct: ownProduct)
+                                ProductFilteredListView(showProduct: checkForFilterKey(filterKey: category), filter: category, ownProduct: ownProduct)
+//                                    .environment(\.editMode, $editMode)
                             }
                             
                         } else if !searchText.isEmpty {
@@ -50,8 +52,12 @@ struct ProductsView: View {
                     }
                     .listStyle(GroupedListStyle())
                     .navigationBarTitle("Lebensmittel", displayMode: .automatic)
-                    .navigationBarItems(trailing: EditButton().disabled(ownProduct.products.isEmpty))
-                    .environment(\.editMode, $editMode)
+                    .toolbar(content: {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            EditButton()
+                                .disabled(ownProduct.products.isEmpty)
+                        }
+                    })
                
                 if !editMode.isEditing && !isSearching {
                     ProductButton(showView: $showConfigurationView, symbol: "plus", color: Color.blue).sheet(isPresented: $showConfigurationView, content: {

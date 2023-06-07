@@ -10,7 +10,7 @@ import SwiftUI
 struct ProductFilteredListView: View {
     let showProduct: Bool
     let filter: String
-    let editButtonState: EditMode
+    @Environment (\.editMode) private var editMode
     @StateObject var ownProduct: CollectedProductOrder
     
     func deleteProducts(at offsets: IndexSet) {
@@ -32,22 +32,27 @@ struct ProductFilteredListView: View {
                         ProductListView(product: ownProduct.product)
                     }
                 }
+                
+//                .deleteDisabled(!editMode!.wrappedValue.isEditing)
+                
                 .onDelete(perform: { indexSet in
                     deleteProducts(at: indexSet)
                 })
+                
                 
                 .onMove(perform: { indices, newOffset in
                     move(from: indices, to: newOffset)
                 })
                 
-                .deleteDisabled(!editButtonState.isEditing)
+                }
             }
         }
     }
-}
+
 
 struct ProductFilteredListView_Previews: PreviewProvider {
     static var previews: some View {
-        ProductFilteredListView(showProduct: true, filter: "Fleisch", editButtonState: .active, ownProduct: CollectedProductOrder()).environmentObject(CollectedProductOrder())
+        ProductFilteredListView(showProduct: true, filter: "Fleisch", ownProduct: CollectedProductOrder())
+            .environmentObject(CollectedProductOrder())
     }
 }

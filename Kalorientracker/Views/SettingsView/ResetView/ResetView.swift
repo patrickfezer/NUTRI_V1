@@ -12,7 +12,7 @@ struct ResetView: View {
     // MARK: Variables
     @AppStorage(ResetView.saveKeyentrySelection) private var entrySelection = 0
     @AppStorage(ResetView.saveKeyAutoDelete) private var autoDelete = false
-    @State private var deleteText = ""
+    @State private var entry = ""
     @State private var showConfirmationView = false
     @EnvironmentObject var cart: Cart
     @EnvironmentObject var productCollection: CollectedProductOrder
@@ -56,6 +56,19 @@ struct ResetView: View {
         
         return entries
     }
+    
+    var deleteText: String
+    {
+        
+        switch entrySelection
+        {
+        case 5:
+            return "Alle Einträge werden gelöscht."
+            
+        default:
+            return "Die letzten \(entrySelectionString[entrySelection]) werden behalten."
+        }
+    }
 
     var body: some View {
         Form {
@@ -78,7 +91,6 @@ struct ResetView: View {
                     Spacer()
                     Text("\(self.cart.orders.count)")
                 }
-                
                 
                 Picker(deletePickerText, selection: $entrySelection) {
                             
@@ -110,26 +122,6 @@ struct ResetView: View {
         }
         .animation(.default, value: autoDelete)
         .navigationBarTitle(Text("Speichermanagement"), displayMode: .inline)
-        .onAppear(perform: {
-            
-            
-            switch entrySelection {
-            case 0:
-                deleteText = "Die letzten \(entrySelectionString[0]) werden behalten."
-            case 1:
-                deleteText = "Die letzten \(entrySelectionString[1]) werden behalten."
-            case 2:
-                deleteText = "Die letzten \(entrySelectionString[2]) werden behalten."
-            case 3:
-                deleteText = "Die letzten \(entrySelectionString[3]) werden behalten."
-            case 4:
-                deleteText = "Die letzten \(entrySelectionString[4]) werden behalten."
-            case 5:
-                deleteText = "Alle Einträge werden gelöscht."
-            default:
-                deleteText = "Keine Auswahl."
-            }
-        })
         .actionSheet(isPresented: $showConfirmationView) {
             ActionSheet(title: Text("Löschen"), message: Text("Die ausgewählten Daten werden unwiederruflich gelöscht."), buttons: [.destructive(Text("Löschen"), action: {
 
